@@ -1,0 +1,63 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path" : "pages/index/Login",
+			"style" : 
+			{
+				"navigationBarTitleText" : "登录"
+			}
+		},
+		{
+			"path" : "pages/index/Register",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注册"
+			}
+		},
+		{
+			"path" : "pages/index/SelectBuilding",
+			"style" : 
+			{
+				"navigationBarTitleText" : "建筑选择"
+			}
+		},
+		{
+			"path" : "pages/index/BuildingA",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼"
+			}
+		},
+		{
+			"path" : "pages/index/BuildingB",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大学衷和楼"
+			}
+		},
+		{
+			"path" : "pages/index/BuildingA/A",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼设备A"
+			}
+		},
+		{
+			"path" : "pages/index/BuildingA/B",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼设备B"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/vk-uview-ui/components/u-$1/u-$1.vue"
+	}
+}
