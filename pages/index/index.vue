@@ -33,7 +33,7 @@
 					type="line"
 					:opts="opts"
 					:chartData="currentChartData"
-					:ontouch="true" 
+					:ontouch="true"
 				/>
 			</view>
 		</view>
@@ -115,12 +115,12 @@ let currentAxisIndex = 0; // 默认从X轴开始
 
 // 图标设置
 const opts = ref({
-	color: ["#1890FF","#91CB74","#FAC858","#EE6666"],
-	padding: [15,15,0,5],
+	color: [],
+	padding: [],
 	legend: {},
-	xAxis: { disableGrid: true, scrollShow: true, itemCount: 2 },
-	yAxis: { gridType: "dash", dashLength: 2 },
-	extra: { line: { type: "straight", width: 2, activeType: "hollow" } }
+	xAxis: {},
+	yAxis: {},
+	extra: {}
 });
 
 function getServerData() {
@@ -130,22 +130,22 @@ function getServerData() {
 		let resX = {
 		  categories: ["0","1","2","3","4","5"],
 		  series: [
-		    { name: "数据A", data: [35,8,31,33,4,20] },
-		    { name: "数据B", data: [70,40,56,100,44,60] },
+		    { name: "数据A", data: [-9,-8,-3,3.51,4.12,-2] },
+		    { name: "数据B", data: [2,4.52,6,1.5,-4,-7.12] },
 		  ]
 		};
 		let resY = {
 		  categories: ["0","1","2","3","4","5"],
 		  series: [
-		    { name: "数据C", data: [100,80,95,150,112,132] },
-		    { name: "数据D", data: [120,110,105,160,122,142] },
+		    { name: "数据C", data: [2,0,-5.12,2,-1,-3] },
+		    { name: "数据D", data: [1,1.12,-4,-5,-2,3.32] },
 		  ]
 		};
 		let resZ = {
 		  categories: ["0","1","2","3","4","5"],
 		  series: [
-		    { name: "数据E", data: [50,60,70,80,90,100] },
-		    { name: "数据F", data: [200,190,180,170,160,150] },
+		    { name: "数据E", data: [3.45,2.12,1,-2,-3,2.13] },
+		    { name: "数据F", data: [1.78,-1,8,7,1,-5.5] },
 		  ]
 		};
 		XAxisData.value = JSON.parse(JSON.stringify(resX));
