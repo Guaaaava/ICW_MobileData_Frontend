@@ -39,14 +39,14 @@
 			"path" : "pages/index/BuildingA/01",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼设备01"
+				"navigationBarTitleText" : "同济大厦A楼设备"
 			}
 		},
 		{
 			"path" : "pages/index/BuildingA/02",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼设备02"
+				"navigationBarTitleText" : "同济大厦A楼设备"
 			}
 		},
 		{
