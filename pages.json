@@ -32,21 +32,35 @@
 			"path" : "pages/index/BuildingB",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大学衷和楼"
+				"navigationBarTitleText" : "同济大学综合楼"
 			}
 		},
 		{
-			"path" : "pages/index/BuildingA/A",
+			"path" : "pages/index/BuildingA/01",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼设备A"
+				"navigationBarTitleText" : "同济大厦A楼设备01"
 			}
 		},
 		{
-			"path" : "pages/index/BuildingA/B",
+			"path" : "pages/index/BuildingA/02",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼设备B"
+				"navigationBarTitleText" : "同济大厦A楼设备02"
+			}
+		},
+		{
+			"path" : "pages/index/SelectDeviceA",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼设备选择"
+			}
+		},
+		{
+			"path" : "pages/index/SelectDeviceB",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济综合楼设备选择"
 			}
 		}
 	],

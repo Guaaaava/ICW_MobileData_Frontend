@@ -1,9 +1,63 @@
 <template>
-  <view class="monitoring-container">
-    <view class="prompt">请选择所要查看的监测点</view>
-    <view class="monitoring-box">
-      <view class="monitoring-item" v-for="point in monitoringPoints" :key="point" @click="goToDetail(point)">
-        <view class="monitoring-name">{{ point }}</view>
+  <view class="container">
+    <view class="box">
+      <!-- 选择台阵 -->
+      <picker mode="selector" :range="array" @change="onPickerChange">
+        <view class="picker">
+          台阵选择：{{ array[selectedIndex] }}
+        </view>
+      </picker>
+      <!-- 方向选择 -->
+      <picker mode="selector" :range="['X', 'Y', 'Z']" @change="onDirectionPickerChange">
+        <view class="picker">
+          方向选择：{{ ['X', 'Y', 'Z'][directionIndex] }}
+        </view>
+      </picker>
+      <!-- 台阵名称 -->
+      <view class="input-group">
+        <text class="label">台阵名称：</text>
+        <text class="value">用户【幕墙振动监测】</text>
+      </view>
+      <!-- 台阵位置 -->
+      <view class="input-group">
+        <text class="label">台阵位置：</text>
+        <text class="value">上海市-市辖区-杨浦区</text>
+      </view>
+      <!-- 测点数量 -->
+      <view class="input-group">
+        <text class="label">测点数量：</text>
+        <text class="value">12个</text>
+      </view>
+      <!-- Y轴缩放 -->
+      <view class="scale-control">
+        <text class="scale-label">Y轴缩放：</text>
+        <button class="scale-button" @click="decreaseScale">-</button>
+        <text class="scale-text">{{ scale }}%</text>
+        <button class="scale-button" @click="increaseScale">+</button>
+      </view>
+      <!-- 限值设置 -->
+      <view class="input-group">
+        <text class="label">限值设置：</text>
+        <input type="number" v-model="limitValue" class="input-field" />
+        <button class="confirm-button" @click="confirmLimit">确认</button>
+      </view>
+      <!-- 增益系数 -->
+      <view class="input-group">
+        <text class="label">增益系数：</text>
+        <input type="number" v-model="gainValue" class="input-field" />
+        <button class="confirm-button" @click="confirmGain">确认</button>
+      </view>
+      <!-- 设备查找 -->
+      <view class="input-group">
+        <text class="label">设备查找：</text>
+        <input type="text" v-model="deviceSearch" class="input-field" />
+        <button class="confirm-button" @click="confirmSearch">确定</button>
+      </view>
+      <!-- 按钮组 -->
+      <view class="button-group">
+        <button class="blue-button" @click="togglePeak">关闭峰值</button>
+        <button class="blue-button" @click="toggleValid">关有效值</button>
+        <button class="green-button" @click="goToSelectDevice">选择设备</button>
       </view>
     </view>
   </view>
@@ -13,71 +67,189 @@
 export default {
   data() {
     return {
-      monitoringPoints: ['A', 'B', 'C', 'D', 'E', 'F']
+      array: ['用户【幕墙振动检测】', '用户【幕墙振动应变】'],
+      selectedIndex: 0,
+      directionIndex: 0,
+      scale: 2,
+      limitValue: '',
+      gainValue: '',
+      deviceSearch: ''
     };
   },
   methods: {
-    goToDetail(point) {
-      const url = `/pages/index/BuildingA/${point}`;
+    onPickerChange(e) {
+      this.selectedIndex = e.detail.value;
+    },
+    onDirectionPickerChange(e) {
+      this.directionIndex = e.detail.value;
+    },
+    increaseScale() {
+      this.scale = this.scale + 1 > 100 ? 100 : this.scale + 1;
+    },
+    decreaseScale() {
+      this.scale = this.scale - 1 < 0 ? 0 : this.scale - 1;
+    },
+    confirmLimit() {
+      // 确认限值逻辑
+    },
+    confirmGain() {
+      // 确认增益系数逻辑
+    },
+    confirmSearch() {
+      // 确认设备查找逻辑
+    },
+    togglePeak() {
+      // 关闭峰值逻辑
+    },
+    toggleValid() {
+      // 关闭有效值逻辑
+    },
+    goToSelectDevice() {
       uni.navigateTo({
-        url
+        url: '/pages/index/SelectDeviceA'
       });
     }
   }
-}
+};
 </script>
 
 <style>
-.monitoring-container {
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
   height: 100vh;
-  justify-content: center;
+  background-color: #f0f4f8;
 }
 
-.prompt {
-  font-size: 24px;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
-}
-
-.monitoring-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-}
-
-.monitoring-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.box {
+  width: 90%;
+  max-width: 400px;
   padding: 20px;
-  width: 80px;
-  height: 100px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.monitoring-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.picker {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.monitoring-name {
-  font-size: 18px;
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.label {
   font-weight: bold;
-  text-align: center;
+  margin-right: 10px;
+  color: #333333;
+}
+
+.value {
+  color: #666666;
+}
+
+.input-field {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.scale-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.scale-label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.scale-text {
+  margin: 0 10px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.scale-button {
+  background-color: #4a90e2;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.scale-button:hover {
+  background-color: #357ab8;
+}
+
+.confirm-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 2px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.confirm-button:hover {
+  background-color: #357ab8;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.blue-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+}
+
+.blue-button:hover {
+  background-color: #357ab8;
+}
+
+.green-button {
+  background-color: #e2bcb1;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+}
+
+.green-button:hover {
+  background-color: #357ab8;
 }
 </style>

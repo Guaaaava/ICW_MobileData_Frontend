@@ -1,6 +1,6 @@
 <template>
   <view class="register-container">
-    <image src="@/static/logo.png" mode="widthFix" class="background-image"></image>
+    <image src="@/static/background.png" mode="widthFix" class="background-image"></image>
     <view class="back-to-login" @click="goBack">返回登录</view>
     <view class="login-box">
       <image src="@/static/logo.png" alt="Logo" class="logo"></image>
@@ -8,7 +8,7 @@
       <input type="password" placeholder="密码" v-model="password" class="input-field" />
       <input type="password" placeholder="请确定密码" v-model="repassword" class="input-field" />
       <view class="button-group">
-        <button @click="register" class="register-button">注册</button>
+        <button @click="register" class="device-button">注册</button>
       </view>
     </view>
   </view>
@@ -83,41 +83,51 @@ export default {
 .button-group {
   width: 100%;
   display: flex;
-  justify-content: center; /* 居中显示注册按钮 */
+  justify-content: center;
   margin-top: 10px;
 }
 
-.register-button {
-  width: 48%;
-  padding: 10px;
+.device-button {
+  width: 80%; /* 根据需要调整宽度 */
+  height: 60px; /* 与设备按钮高度一致 */
+  margin: 10px;
   border: none;
-  background-color: #007BFF;
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  background-color: #e0f7fa; /* 与设备按钮背景一致 */
+  color: #333;
+  font-size: 20px; /* 与设备按钮字体大小一致 */
+  line-height: 60px; /* 与设备按钮高度一致，垂直居中文本 */
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.register-button:hover {
-  background-color: #0056b3;
+.device-button:hover {
+  background-color: #4caf50; /* 与设备按钮悬浮效果一致 */
+  color: white;
 }
 
 .back-to-login {
-  position: absolute; /* 绝对定位 */
-  top: 20px; /* 距离顶部20px */
-  left: 20px; /* 距离左侧20px */
-  padding: 10px 20px; /* 内边距 */
-  background-color: #fff; /* 背景色 */
-  border: 1px solid #ccc; /* 边框 */
-  border-radius: 5px; /* 圆角 */
-  font-size: 16px; /* 字体大小 */
-  cursor: pointer; /* 鼠标样式 */
-  transition: border-color 0.3s ease, background-color 0.3s ease; /* 过渡效果 */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background-color: #e0f7fa; /* 与设备按钮背景一致 */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .back-to-login:hover {
-  border-color: #007BFF; /* 鼠标悬浮时边框颜色 */
-  background-color: #f0f9ff; /* 鼠标悬浮时背景色 */
+  background-color: #4caf50; /* 与设备按钮悬浮效果一致 */
+  color: white;
 }
 </style>

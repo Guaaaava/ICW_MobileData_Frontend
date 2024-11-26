@@ -3,12 +3,12 @@
     <view class="prompt">请选择所要查看的建筑</view>
     <view class="building-box">
       <view class="building-item" @click="goToBuilding('A')">
-        <image src="@/static/logo.png" mode="aspectFill" class="building-image"></image>
+        <image src="@/static/AFloor.png" mode="aspectFill" class="building-image"></image>
         <view class="building-name">同济大厦A楼</view>
       </view>
       <view class="building-item" @click="goToBuilding('B')">
-        <image src="@/static/logo.png" mode="aspectFill" class="building-image"></image>
-        <view class="building-name">同济大学衷和楼</view>
+        <image src="@/static/BFloor.png" mode="aspectFill" class="building-image"></image>
+        <view class="building-name">同济大学综合楼</view>
       </view>
     </view>
   </view>

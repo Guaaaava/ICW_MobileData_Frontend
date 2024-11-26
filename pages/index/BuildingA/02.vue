@@ -57,10 +57,11 @@
       <view class="button-group">
         <button class="blue-button" @click="togglePeak">关闭峰值</button>
         <button class="blue-button" @click="toggleValid">关闭有效值</button>
+		<button class="blue-button" @click="goToSelectDevice">选择设备</button>
       </view>
     </view>
     <!-- 查看数据图表按钮 -->
-    <button class="data-chart-button" @click="goToDataChart">查看数据图表</button>
+    
   </view>
 </template>
 
@@ -105,7 +106,7 @@ export default {
     toggleValid() {
       // 关闭有效值逻辑
     },
-    goToDataChart() {
+    goToSelectDevice() {
       // 跳转到数据图表页面的逻辑
       uni.navigateTo({
         url: '/pages/dataChart/dataChart' // 假设数据图表页面的路径为 '/pages/dataChart/dataChart'
@@ -207,19 +208,5 @@ export default {
   background-color: #0056b3;
 }
 
-.data-chart-button {
-  position: absolute; /* 绝对定位 */
-  right: 20px; /* 距离右侧20px */
-  bottom: 20px; /* 距离底部20px */
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-.data-chart-button:hover {
-  background-color: #0056b3;
-}
 </style>

@@ -1,13 +1,13 @@
 <template>
   <view class="login-container">
-    <image src="@/static/logo.png" mode="widthFix" class="background-image"></image>
+    <image src="@/static/background.png" mode="widthFix" class="background-image"></image>
     <view class="login-box">
       <image src="@/static/logo.png" alt="Logo" class="logo"></image>
       <input type="text" placeholder="用户名" v-model="username" class="input-field" />
       <input type="password" placeholder="密码" v-model="password" class="input-field" />
       <view class="button-group">
-        <button @click="login" class="login-button">登录</button>
-        <button @click="register" class="register-button">注册</button>
+        <button @click="login" class="device-button">登录</button>
+        <button @click="register" class="device-button">注册</button>
       </view>
     </view>
   </view>
@@ -54,10 +54,15 @@ export default {
 
 .background-image {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  height: 100vh; /* 使用100vh确保图片覆盖整个视口高度 */
+  object-fit: cover; /* 确保图片覆盖整个容器，同时保持宽高比 */
+  background-repeat: no-repeat; /* 防止图片重复 */
+  background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+  background-position: center; /* 背景图片居中显示 */
+  z-index: -1; /* 确保背景图片在内容之下 */
 }
 
 .login-box {
@@ -96,21 +101,31 @@ export default {
   margin-top: 10px;
 }
 
-.login-button,
-.register-button {
-  width: 48%;
-  padding: 10px;
+.device-button {
+  width: 48%; /* 根据需要调整宽度 */
+  height: 60px; /* 与设备按钮高度一致 */
+  margin: 10px;
   border: none;
-  background-color: #007BFF;
-  color: white;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 8px;
+  background-color: #e0f7fa; /* 与设备按钮背景一致 */
+  color: #333;
+  font-size: 20px; /* 与设备按钮字体大小一致 */
+  line-height: 60px; /* 与设备按钮高度一致，垂直居中文本 */
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-button:hover,
-.register-button:hover {
-  background-color: #0056b3;
+.device-button:hover {
+  background-color: #4caf50; /* 与设备按钮悬浮效果一致 */
+  color: white;
+}
+
+.device-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 </style>
