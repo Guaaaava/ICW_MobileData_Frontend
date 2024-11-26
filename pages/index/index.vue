@@ -1,71 +1,49 @@
 <template>
 	<view class="container">
-		<!-- Dashboard Toolbar -->
+		<!-- 工具栏 -->
 		<view class="toolbar">
-			<u-select v-model="show" mode="single-column" :list="devices"></u-select>
+			<u-select v-model="show" mode="single-column" :list="deviceSelectList" @confirm="deviceSelectConfirm"></u-select>
 			<u-button @click="show = true">选择设备</u-button>
 		</view>
 		
-		<!-- Device Information Card -->
-		<view class="device-info">
-		  <view class="device-item">
-		    <text class="device-label">设备名称:</text>
-		    <text class="device-value">{{ selectedDevice.deviceName }}</text>
-		  </view>
-		  <view class="device-item">
-		    <text class="device-label">设备ID:</text>
-		    <text class="device-value">{{ selectedDevice.deviceId }}</text>
-		  </view>
-		  <view class="device-item">
-		    <text class="device-label">可用:</text>
-		    <text class="device-value">{{ selectedDevice.disabled === true ? '是' : '否' }}</text>
-		  </view>
-		  <view class="device-item">
-		    <text class="device-label">在线:</text>
-		    <text class="device-value">{{ selectedDevice.online === true ? '是' : '否' }}</text>
-		  </view>
-		</view>
-		
-		<!-- Dashboard Cards -->
+		<!-- 数据图表 -->
 		<view class="dashboard-cards">
+			<text>时程曲线</text>
 			<view class="card">
 				<qiun-data-charts
 					type="line"
-					:opts="opts"
-					:chartData="currentChartData"
-					:ontouch="true"
+					:opts="timeChartOpts"
+					:chartData="timeChartData"
+					:loadingType=0
+				/>
+			</view>
+			<text>频谱曲线</text>
+			<view class="card">
+				<qiun-data-charts
+					type="line"
+					:opts="amplitudeChartOpts"
+					:chartData="amplitudeChartData"
+					:loadingType=0
 				/>
 			</view>
 		</view>
 		
-		<!-- Axis Buttons -->
+		<!-- X、Y、Z 轴切换按钮 -->
 		<view class="axis-buttons">
-		  <u-button class="axis-button" @click="changeAxis('left')">上一个</u-button>
-		  <u-button class="axis-button" @click="changeAxis('right')">下一个</u-button>
+			<u-button class="axis-button" @click="changeAxis('left')">{{ axisOrder[(curAxisIndex + 2) % 3] }}</u-button>
+			<u-button class="axis-button" @click="changeAxis('right')">{{ axisOrder[(curAxisIndex + 1) % 3] }}</u-button>
 		</view>
+		
 	</view>
 </template>
 
 <script setup lang="ts">
 import { onShow } from '@dcloudio/uni-app';
 import { ref, watch } from 'vue';
+import axios from 'axios';
 
-let show = ref(false);
-let devices = ref([]);
-let selectedDevice = ref({
-  deviceId: '9A0D1958',
-  deviceName: 'A楼03',
-  disabled: true,
-  online: true,
-});
-
-devices.value = [
-	{ value: '1', label: '同济A楼03' },
-	{ value: '2', label: '同济B楼04' },
-	{ value: '3', label: '衷和楼' }
-];
-
-//获取设备信息
+/*-- 设备信息接口		--
+	-- 数据来源：后端数据库 --*/
 interface Device {
   deviceName: string;
   deviceId: string;
@@ -74,424 +52,482 @@ interface Device {
   higherOuliter: number | string;
 }
 
-// 使用初始空数组并指定类型
-let deviceList = ref<Device[]>([]);
-
-const fetchDeviceList = async () => {
-  // try {
-  //   const response = await useFetch('/api/device/all');
-  //   deviceList.value = response.data.value.data.devices as unknown as Device[];
-		// console.log(deviceList.value);
-  // } catch (error) {
-  //   console.error('Error getting device list:', error);
-  // }
-	
-	// 模拟获取的数据
-	deviceList.value = [{
-		deviceName: 'A楼03',
-		deviceId: '9A0D1958',
-		offset: 1,
-		lowerOuliter: 1,
-		higherOuliter: 1,
-	}];
-};
-
-onShow(() => {
-	fetchDeviceList();
-	getServerData();
-	show.value = false;
-});
-
-const timeCurveData = ref({});
-const AmplitudeCurveData = ref({});
-
-const XAxisData = ref({});
-const YAxisData = ref({});
-const ZAxisData = ref({});
-const currentChartData = ref({});
-
-const axisOrder = ['x', 'y', 'z'];
-let currentAxisIndex = 0; // 默认从X轴开始
-
-// 图标设置
-const opts = ref({
-	color: [],
-	padding: [],
-	legend: {},
-	xAxis: {},
-	yAxis: {},
-	extra: {}
-});
-
-function getServerData() {
-	// 模拟从服务器获取数据
-	setTimeout(() => {
-		// 模拟从服务器返回数据
-		let resX = {
-		  categories: ["0","1","2","3","4","5"],
-		  series: [
-		    { name: "数据A", data: [-9,-8,-3,3.51,4.12,-2] },
-		    { name: "数据B", data: [2,4.52,6,1.5,-4,-7.12] },
-		  ]
-		};
-		let resY = {
-		  categories: ["0","1","2","3","4","5"],
-		  series: [
-		    { name: "数据C", data: [2,0,-5.12,2,-1,-3] },
-		    { name: "数据D", data: [1,1.12,-4,-5,-2,3.32] },
-		  ]
-		};
-		let resZ = {
-		  categories: ["0","1","2","3","4","5"],
-		  series: [
-		    { name: "数据E", data: [3.45,2.12,1,-2,-3,2.13] },
-		    { name: "数据F", data: [1.78,-1,8,7,1,-5.5] },
-		  ]
-		};
-		XAxisData.value = JSON.parse(JSON.stringify(resX));
-		YAxisData.value = JSON.parse(JSON.stringify(resY));
-		ZAxisData.value = JSON.parse(JSON.stringify(resZ));
-		currentChartData.value = XAxisData.value; // 默认显示X轴数据
-	}, 500);
+/*-- 当前建筑设备信息接口 --
+	-- 数据来源：后端数据库 --*/
+interface DeviceInfo {
+	deviceName: string;
+	deviceId: string;
+	disabled: boolean;
+	online: boolean;
 }
 
-// 选择X、Y、Z轴的按钮响应函数
-const changeAxis = (direction : string) => {
-	if (direction === 'left') {
-	  currentAxisIndex = (currentAxisIndex - 1 + axisOrder.length) % axisOrder.length;
-	} else if (direction === 'right') {
-	  currentAxisIndex = (currentAxisIndex + 1) % axisOrder.length;
-	}
-	
-	const currentAxis = axisOrder[currentAxisIndex];
-	if (currentAxis === 'x') {
-		currentChartData.value = XAxisData.value;
-	} else if (currentAxis === 'y') {
-		currentChartData.value = YAxisData.value;
-	} else if (currentAxis === 'z') {
-    currentChartData.value = ZAxisData.value;
-  }
+/*-- 当前建筑设备选项接口		--
+	-- 数据来源：DeviceThisBuilding --*/
+interface DeviceSelect {
+	value: string;
+	label: string;
 }
 
-/* -------------------------------------------------------------------------------------------------
-// 辅助函数，用于补齐零
+/*-- 工具栏 		--
+  -- 获取设备信息 --*/
+let show = ref<boolean>(false); // 控制 select 组件的显示
+let allDevices = ref<Device[]>([]); // 所有设备列表
+let buildingName = ref<string>(''); // 当前建筑名称
+let deviceThisBuilding = ref<DeviceInfo[]>([]); // 当前建筑的设备列表
+let deviceSelectList = ref<DeviceSelect[]>([]); // 选项列表
+let selectedDeviceId = ref<string>('9A0D1958'); // 初始化为'A楼03'
+
+// 方法：从服务器获取所有设备信息
+const getAllDevices = async () => {
+	// const url = '';
+	// try {
+	// 	const response = await axios.get(url);
+	// 	if (response.data) {
+	// 		allDevices.value = response.data as Device[];
+	// 	} else {
+	// 		console.log('Warning: getAllDevices response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting all devices: ', error);
+	// }
+	allDevices.value = [
+		{ deviceName: 'A楼01', deviceId: 'A77C5238', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: 'A楼02', deviceId: 'F853ED49', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: 'A楼03', deviceId: '9A0D1958', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: 'A楼04', deviceId: '87C3D4E4', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: 'A楼05', deviceId: '29FA1867', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: 'A楼06', deviceId: 'E43AC643', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '综合楼01', deviceId: 'E884C99D', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '综合楼02', deviceId: '612B04ED', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '综合楼03', deviceId: '8361D7CD', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '综合楼04', deviceId: '8850A7D7', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '综合楼05', deviceId: '4787BE3A', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+		{ deviceName: '风压', deviceId: 'F001', offset: 0, lowerOuliter: 0, higherOuliter: 0 },
+	];
+}
+
+// 方法：获取当前建筑信息
+// ### todo 需要从之前页面获取
+const getBuildingName = () => {
+	// 
+	// 
+	// 
+	buildingName.value = '同济A楼';
+}
+
+// 方法：从服务器获取当前建筑所有设备信息
+const getDeviceThisBuilding = async () => {
+	// const url = '';
+	// try {
+	// 	const response = await axios.post(url, { query: buildingName });
+	// 	if (response.data) {
+	// 		deviceThisBuilding.value = response.data as DeviceInfo[];
+	// 	} else {
+	// 		console.log('Warning: getDeviceThisBuilding response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting device this building: ', error);
+	// }
+	deviceThisBuilding.value = [
+		{ deviceName: 'A楼01', deviceId: 'A77C5238', disabled: true, online: false },
+		{ deviceName: 'A楼02', deviceId: 'F853ED49', disabled: false, online: true },
+		{ deviceName: 'A楼03', deviceId: '9A0D1958', disabled: false, online: true },
+		{ deviceName: 'A楼04', deviceId: '87C3D4E4', disabled: false, online: true },
+		{ deviceName: 'A楼05', deviceId: '29FA1867', disabled: true, online: false },
+		{ deviceName: 'A楼06', deviceId: 'E43AC643', disabled: true, online: false },
+	];
+	// deviceThisBuilding.value = [
+	// 	{ deviceName: '综合楼01', deviceId: 'E884C99D', disabled: true, online: false },
+	// 	{ deviceName: '综合楼02', deviceId: '612B04ED', disabled: true, online: false },
+	// 	{ deviceName: '综合楼03', deviceId: '8361D7CD', disabled: true, online: false },
+	// 	{ deviceName: '综合楼04', deviceId: '8850A7D7', disabled: true, online: false },
+	// 	{ deviceName: '综合楼05', deviceId: '4787BE3A', disabled: true, online: false },
+	// ];
+}
+
+// 方法：设置设备选项
+const setDeviceSelectList = () => {
+	deviceThisBuilding.value.forEach((device, index) => {
+		let deviceLabel = device.deviceName + '-' + device.deviceId + '-' +
+											(device.disabled ? '不可用' : '可用') + '-' +
+											(device.online ? '在线' : '离线');
+		deviceSelectList.value.push({ value: (index+1).toString(), label: deviceLabel });
+	});
+}
+
+// 方法：选择设备确认的响应
+// ### todo 下次选择时初始位置应为上次选择的设备
+const deviceSelectConfirm = (selectedDevice: DeviceSelect) => {
+	let selectedIndex = selectedDevice[0].index;
+	selectedDeviceId.value = deviceThisBuilding.value[selectedIndex].deviceId;
+}
+
+/*-- 工具函数 		--
+  -- 图表X轴配置 --*/
+// 方法：用于补齐零
 const padZero = (num: number) => num.toString().padStart(2, '0');
 
-// 计算x轴的函数
+// 方法：计算 X 轴，返回 time_list
 const caculateTimeList = (start: number, interval: number): string[] => {
-    const time_list: string[] = [];
-    let i = 0;
-    for(;i < 1000; i++){
-        const date = new Date(start + i * interval);
-        const year = date.getUTCFullYear(); // 获取年份
-        const month = date.getUTCMonth() + 1; // 获取月份（注意月份从 0 开始，需要加 1）
-        const day = date.getUTCDate(); // 获取日期
-        const hour = date.getUTCHours() + 8; // 获取小时（加 8 是为了转换为北京时间）
-        const minute = date.getUTCMinutes(); // 获取分钟
-        const second = date.getUTCSeconds(); // 获取秒钟
-
-        // const beijingTimeString = `${year}-${padZero(month)}-${padZero(day)}${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
-        const beijingTimeString = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
-        time_list.push(beijingTimeString);
-    }
-    return time_list;
+	const time_list: string[] = [];
+	let i = 0;
+	for(;i < 1000; i++){
+	    const date = new Date(start + i * interval);
+	    const hour = date.getUTCHours() + 8; // 获取小时（加 8 是为了转换为北京时间）
+	    const minute = date.getUTCMinutes(); // 获取分钟
+	    const second = date.getUTCSeconds(); // 获取秒钟
+	
+	    const beijingTimeString = `${padZero(hour)}:${padZero(minute)}:${padZero(second)}`;
+	    time_list.push(beijingTimeString);
+	}
+	return time_list;
 }
 
-//绘制时程曲线
-const drawTimeChart = (chartData: any) => {
-  const deviceInfo = deviceList.value.find((d) => d.deviceId === chartData.device);
-  if (deviceInfo) {
-    chartData.deviceName = deviceInfo.deviceName;
-  }
-  var option: EChartsOption;
+/*-- 时程曲线：X 轴为时间(间隔1秒) 		--
+  -- 					Y 轴为加速度大小(/gal) --*/
+let timeXData = ref([]);
+let timeYData = ref([]);
+let timeZData = ref([]);
+let timeChartData = ref([]);
 
-  //计算x轴
-  const x_axis = caculateTimeList(chartData.s_date, 16);
-
-  interface YData {
-    [key: string]: number[]; // 添加索引签名，允许任意字符串类型的属性访问
-  }
-
-  const yData: YData = {
-    x: chartData.x,
-    y: chartData.y,
-    z: chartData.z
-  };
-
-  let series: any[] = [];
-  for (let name in yData) {
-    var yline: any;
-    var line_label: any;
-    var label_position: any;
-    if (name == 'x') {
-      yline = chartData.rmsx;
-      line_label = `X均值：${chartData.rmsx}`;
-      label_position = 'insideStartTop';
-    } else if (name == 'y') {
-      yline = chartData.rmsy;
-      line_label = `Y均值：${chartData.rmsy}`;
-      label_position = 'insideMiddleTop';
-
-    } else if (name == 'z') {
-      yline = chartData.rmsz;
-      line_label = `Z均值：${chartData.rmsz}`;
-      label_position = 'insideEndTop';
-
-    }
-    series.push({
-      name: name,
-      type: 'line',
-      data: yData[name],
-      smooth: false,
-      symbol: 'none', // 设置数据点的样式为 'none'
-      markLine: {
-        data: [
-          {name: 'Average', yAxis: yline},
-        ],
-        itemStyle: {
-          normal: {
-            lineStyle: {
-              color: '#ff0000',
-            }
-          }
-        },
-        label: {
-          position: label_position,
-          formatter: line_label,
-          color: '#ff0000',
-        }
-      }
-    })
-  }
-  option = {
-    title: {
-      text: `时程曲线：${chartData.deviceName}（设备${chartData.device}）`,
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {   //选择
-      data: ['x', 'y', 'z']
-    },
-    grid: {
-      left: '2%',
-      right: '2%',
-      bottom: '3%',
-      containLabel: true
-    },
-    toolbox: {
-      show: true, // 是否显示工具栏
-      feature: {
-        saveAsImage: {}  //保存图片
-      }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: x_axis
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        formatter: '{value} gal'
-      }
-    },
-    series: series
-  };
-
-  option && timeChart.setOption(option);
-}
-
-//绘制幅频曲线
-const drawAmplitudeChart = (data: any) => {
-  const deviceInfo = deviceList.value.find((d) => d.deviceId === data.device);
-  if (deviceInfo) {
-    data.deviceName = deviceInfo.deviceName;
-  }
-  var option2: EChartsOption;
-
-  //计算x轴
-  interface YData {
-    [key: string]: number[]; // 添加索引签名，允许任意字符串类型的属性访问
-  }
-
-  const yData: YData = {
-    x: data.x,
-    y: data.y,
-    z: data.z
-  };
-
-
-  let series: any[] = [];
-  for (let name in yData) {
-    if (Object.prototype.hasOwnProperty.call(yData, name)) {
-      series.push({
-        name: name,
-        type: 'line',
-        data: yData[name],
-        smooth: false,
-        symbol: 'none', // 设置数据点的样式为 'none'
-      });
-    }
-  }
-
-  option2 = {
-    title: {
-      text: `频幅曲线：${data.deviceName}（设备${data.device}）`,
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {   //选择
-      data: ['x', 'y', 'z']
-    },
-    grid: {
-      left: '2%',
-      right: '2%',
-      bottom: '3%',
-      containLabel: true
-    },
-    toolbox: {
-      show: true, // 是否显示工具栏
-      feature: {
-        saveAsImage: {}  //保存图片
-      }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: data.interval
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: series
-  };
-  option2 && amplitudeChart.setOption(option2);
-}
-
-//WebSocket
-const websocketUrl = 'wss://digetech.cn:8771/websocket/user_58';
-let socket1 = new WebSocket(websocketUrl);
-
-//socket请求参数1：获取设备实时状态
-const request1 = {
-  code: 2,
-  data: [
-    'A77C5238', 'F853ED49', '9A0D1958', '87C3D4E4', '29FA1867', 'E43AC643'
-  ],
-  key: 'qiushangzhou852'
-};
-//socket请求参数2：获取设备详细数据
-let request2 = {
-  code: 1,
-  data: selectedDevice.value.deviceId,
-  channel: '0',
-  pam: 1,
-  key: 'qiushangzhou852'
-};
-
-
-//socket连接成功
-socket1.onopen = () => {
-  console.log('WebSocket connection1 opened');
-  // WebSocket连接成功后发送请求1——获取设备实时状态
-  socket1.send(JSON.stringify(request1));
-  socket1.send(JSON.stringify(request2));
-};
-
-//接收到socket消息
-socket1.onmessage = (event) => {
-  const message = JSON.parse(event.data);
-  if (message.code = 20001) {
-    if (message.message == '基础数据') {
-      // console.log(message.data);
-      timeCurveData = message.data[0];
-      AmplitudeCurveData = message.data[1];
-      drawTimeChart(message.data[0]);
-      drawAmplitudeChart(message.data[1]);
-    } else if (message.message == '设备状态') {
-      // console.log(message.data);
-      devices.value = Object.entries(message.data).map(([key, value]) => ({
-        deviceId: key,
-        disabled: value === 1 ? false : true,
-        online: value === 1 ? true : false
-      }))
-      devices.value.forEach((device: { deviceId: string; deviceName: string; }) => {
-        // 假设 deviceList 已经填充了设备名
-        const deviceInfo = deviceList.value.find((d) => d.deviceId === device.deviceId);
-        if (deviceInfo) {
-          device.deviceName = deviceInfo.deviceName;
-        }
-      });
-
-    }
-
-  }
-};
-
-//socket错误
-socket1.onerror = (error) => {
-  console.error('WebSocket error:', error);
-};
-
-//socket关闭
-socket1.onclose = () => {
-  console.log('WebSocket connection closed');
-};
-
-
-watch(selectedDevice, (newValue) => {
-  request2.data = newValue.deviceId;
-  socket1.close();
-  socket1 = new WebSocket(websocketUrl);
-  socket1.onopen = () => {
-    console.log('WebSocket connection1 reopened');
-    // WebSocket连接成功后发送请求1——获取设备实时状态
-    socket1.send(JSON.stringify(request1));
-    socket1.send(JSON.stringify(request2));
-  };
-
-  //接收到socket消息
-  socket1.onmessage = (event) => {
-    const message = JSON.parse(event.data);
-    if (message.code = 20001) {
-      if (message.message == '基础数据') {
-        // console.log(message.data);
-        timeCurveData = message.data[0];
-        AmplitudeCurveData = message.data[1];
-        drawTimeChart(message.data[0]);
-        drawAmplitudeChart(message.data[1]);
-      } else if (message.message == '设备状态') {
-        // console.log(message.data);
-        devices.value = Object.entries(message.data).map(([key, value]) => ({
-          deviceId: key,
-          disabled: value === 1 ? false : true,
-          online: value === 1 ? true : false
-        }))
-        devices.value.forEach((device: { deviceId: string; deviceName: string; }) => {
-          // 假设 deviceList 已经填充了设备名
-          const deviceInfo = deviceList.value.find((d) => d.deviceId === device.deviceId);
-          if (deviceInfo) {
-            device.deviceName = deviceInfo.deviceName;
-          }
-        });
-      }
-
-    }
-  };
-
-  //socket错误
-  socket1.onerror = (error) => {
-    console.error('WebSocket error:', error);
-  };
-
-  //socket关闭
-  socket1.onclose = () => {
-    console.log('WebSocket connection closed');
-  };
+// 时程曲线图表设置
+const timeChartOpts = ref({
+	dataLabel: false,
+	update: true,
+	duration: 0,
+	dataPointShape: false,
+	padding: [20, 30, 0, 5],
+	xAxis: { axisLine: false, boundaryGap: 'justify', labelCount: 5 },
+	yAxis: { gridType: 'solid', data: [{ min: -1, max: 1 }] },
+	extra: { markLine: { data: [{ value: 0, showLabel: true, labelOffsetX: -10 }] } }
 });
------------------------------------------------------------------------------------------------------ */
+
+// 方法：获取时程曲线 X、Y、Z 轴数据
+const getTimeData = async () => {
+	// const xDataUrl = '';
+	// const yDataUrl = '';
+	// const zDataUrl = '';
+	
+	// // X 轴数据
+	// try {
+	// 	const response = await axios.post(xDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let xresponse = response.data as any;
+	// 		timeXData.value = JSON.parse(JSON.stringify(processTimeData(xresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXTimeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X time Data: ', error);
+	// }
+	// // Y 轴数据
+	// try {
+	// 	const response = await axios.post(yDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let yresponse = response.data as any;
+	// 		timeYData.value = JSON.parse(JSON.stringify(processTimeData(yresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXTimeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X time Data: ', error);
+	// }
+	// // Z 轴数据
+	// try {
+	// 	const response = await axios.post(zDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let zresponse = response.data as any;
+	// 		timeZData.value = JSON.parse(JSON.stringify(processTimeData(zresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXTimeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X time Data: ', error);
+	// }
+	//
+	// timeChartData.value = timeXData.value; // 默认显示 X 轴
+	
+	let xresData = {};
+	let yresData = {};
+	let zresData = {};
+	timeXData.value = JSON.parse(JSON.stringify(xresData));
+	timeYData.value = JSON.parse(JSON.stringify(yresData));
+	timeZData.value = JSON.parse(JSON.stringify(zresData));
+	timeChartData.value = timeXData.value; // 默认显示 X 轴
+}
+
+// 方法：处理时程数据以适配图表，返回处理后数据
+// ### 需要根据具体数据格式进行处理
+const processTimeData = (originAxisData: any, axis: string) => {
+	let timeList = caculateTimeList(originAxisData.s_date, 16);
+	
+	let axisData: number[] = [];
+	if (axis === 'x') {
+		axisData = originAxisData.x;
+	} else if (axis === 'y') {
+		axisData = originAxisData.y;
+	} else if (axis === 'z') {
+		axisData = originAxisData.z;
+	}
+	
+	let resData = {
+		categories: timeList,
+		series: [ { name: '数据', data: axisData } ]
+	};
+	
+	return resData;
+}
+
+/*-- 频谱曲线：X 轴为频率(0-63) --
+	--					Y 轴为幅值 			--*/
+let amplitudeXData = ref([]);
+let amplitudeYData = ref([]);
+let amplitudeZData = ref([]);
+let amplitudeChartData = ref([]);
+
+// 频谱曲线图表设置
+const amplitudeChartOpts = ref({
+	dataLabel: false,
+	update: true,
+	duration: 0,
+	dataPointShape: false,
+	padding: [20, 30, 0, 5],
+	xAxis: { boundaryGap: 'justify', labelCount: 5 },
+	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.06 }] }
+});
+
+// 方法：获取频谱曲线 X、Y、Z 轴数据
+const getAmplitudeData = async () => {
+	// const xDataUrl = '';
+	// const yDataUrl = '';
+	// const zDataUrl = '';
+	
+	// // X 轴数据
+	// try {
+	// 	const response = await axios.post(xDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let xresponse = response.data as any;
+	// 		amplitudeXData.value = JSON.parse(JSON.stringify(processAmpData(xresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXAmplitudeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X amplitude Data: ', error);
+	// }
+	// // Y 轴数据
+	// try {
+	// 	const response = await axios.post(yDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let yresponse = response.data as any;
+	// 		amplitudeYData.value = JSON.parse(JSON.stringify(processAmpData(yresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXAmplitudeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X amplitude Data: ', error);
+	// }
+	// // Z 轴数据
+	// try {
+	// 	const response = await axios.post(zDataUrl, { query: selectedDeviceId });
+	// 	if (response.data) {
+	// 		let zresponse = response.data as any;
+	// 		amplitudeZData.value = JSON.parse(JSON.stringify(processAmpData(zresponse)));
+	// 	} else {
+	// 		console.log('Warning: getXAmplitudeData response is empty.');
+	// 	}
+	// } catch (error) {
+	// 	console.error('Error getting X amplitude Data: ', error);
+	// }
+	//
+	// amplitudeChartData.value = amplitudeXData.value; // 默认显示 X 轴
+	
+	let xresData = {};
+	let yresData = {};
+	let zresData = {};
+	amplitudeXData.value = JSON.parse(JSON.stringify(xresData));
+	amplitudeYData.value = JSON.parse(JSON.stringify(yresData));
+	amplitudeZData.value = JSON.parse(JSON.stringify(zresData));
+	amplitudeChartData.value = amplitudeXData.value; // 默认显示 X 轴
+}
+
+// 方法：处理频谱数据以适配图表，返回处理后数据
+// ### 需要根据具体数据格式进行处理
+const processAmpData = (originAxisData: any, axis: string) => {
+	let intervals = originAxisData.interval;
+	
+	let axisData: number[] = [];
+	if (axis === 'x') {
+		axisData = originAxisData.x;
+	} else if (axis === 'y') {
+		axisData = originAxisData.y;
+	} else if (axis === 'z') {
+		axisData = originAxisData.z;
+	}
+	
+	let resData = {
+		categories: intervals,
+		series: [ { name: '数据', data: axisData } ]
+	};
+	
+	return resData;
+}
+
+/*-- 图表方向切换按钮 --*/
+let curAxisIndex = ref<number>(0); // 从 X 轴开始
+const axisOrder = ['X轴', 'Y轴', 'Z轴'];
+
+// 方法：切换不同方向图表
+const changeAxis = (direction: string) => {
+	if (direction === 'left') {
+	  curAxisIndex.value = (curAxisIndex.value + 2) % 3;
+	} else if (direction === 'right') {
+	  curAxisIndex.value = (curAxisIndex.value + 1) % 3;
+	}
+	
+	const currentAxis = axisOrder[curAxisIndex.value];
+	if (currentAxis === 'X轴') {
+		timeChartData.value = timeXData.value;
+		amplitudeChartData.value = amplitudeXData.value;
+	} else if (currentAxis === 'Y轴') {
+		timeChartData.value = timeYData.value;
+		amplitudeChartData.value = amplitudeYData.value;
+	} else if (currentAxis === 'Z轴') {
+	  timeChartData.value = timeZData.value;
+	  amplitudeChartData.value = amplitudeZData.value;
+	}
+}
+
+/*-- 入口函数 --*/
+onShow(() => {
+	getAllDevices(); // 获取所有设备信息
+	getBuildingName(); // 获取当前建筑信息
+	getDeviceThisBuilding(); // 获取当前建筑所有设备信息
+	setDeviceSelectList(); // 配置设备选择列表
+	getTimeData(); // 获取时程曲线数据
+	getAmplitudeData(); // 获取频谱曲线数据
+	
+	webSocketTest(); // WebSocket 测试
+});
+
+// 方法：WebSocket 测试
+const webSocketTest = () => {
+	const websocketUrl = 'wss://digetech.cn:8771/websocket/user_58';
+	let socket1 = new WebSocket(websocketUrl);
+	
+	// socket请求参数1：获取设备实时状态
+	const request1 = {
+	  code: 2,
+	  data: [ 'A77C5238', 'F853ED49', '9A0D1958', '87C3D4E4', '29FA1867', 'E43AC643' ],
+	  key: 'qiushangzhou852'
+	};
+	// socket请求参数2：获取设备详细数据
+	let request2 = {
+	  code: 1,
+	  data: selectedDeviceId.value,
+	  channel: '0',
+	  pam: 1,
+	  key: 'qiushangzhou852'
+	};
+	
+	// socket连接成功
+	socket1.onopen = () => {
+	  console.log('WebSocket connection1 opened');
+	  // WebSocket连接成功后发送请求1——获取设备实时状态
+	  socket1.send(JSON.stringify(request1));
+		// WebSocket连接成功后发送请求2——获取设备详细数据
+	  socket1.send(JSON.stringify(request2));
+	};
+	
+	// 接收到socket消息
+	socket1.onmessage = (event) => {
+	  const message = JSON.parse(event.data);
+	  if (message.code = 20001) {
+	    if (message.message == '基础数据') {
+	      // 时程曲线
+				let xresData = processTimeData(message.data[0], 'x');
+				let yresData = processTimeData(message.data[0], 'y');
+				let zresData = processTimeData(message.data[0], 'z');
+				timeXData.value = JSON.parse(JSON.stringify(xresData));
+				timeYData.value = JSON.parse(JSON.stringify(yresData));
+				timeZData.value = JSON.parse(JSON.stringify(zresData));
+				timeChartData.value = timeXData.value;
+				
+	      // 频谱曲线
+				xresData = processAmpData(message.data[1], 'x');
+				yresData = processAmpData(message.data[1], 'y');
+				zresData = processAmpData(message.data[1], 'z');
+				amplitudeXData.value = JSON.parse(JSON.stringify(xresData));
+				amplitudeYData.value = JSON.parse(JSON.stringify(yresData));
+				amplitudeZData.value = JSON.parse(JSON.stringify(zresData));
+				amplitudeChartData.value = amplitudeXData.value;
+	    } else if (message.message == '设备状态') {
+				// 更新设备选项
+	    }
+	  }
+	};
+	
+	// socket错误
+	socket1.onerror = (error) => {
+	  console.error('WebSocket error:', error);
+	};
+	
+	// socket关闭
+	socket1.onclose = () => {
+	  console.log('WebSocket connection closed');
+	};
+	
+	// 监测设备选择变化
+	watch(selectedDeviceId, (newValue) => {
+	  request2.data = newValue;
+	  socket1.close();
+	  socket1 = new WebSocket(websocketUrl);
+	  socket1.onopen = () => {
+	    console.log('WebSocket connection1 reopened');
+	    // WebSocket连接成功后发送请求1——获取设备实时状态
+	    socket1.send(JSON.stringify(request1));
+			// WebSocket连接成功后发送请求2——获取设备详细数据
+	    socket1.send(JSON.stringify(request2));
+	  };
+	
+	  // 接收到socket消息
+	  socket1.onmessage = (event) => {
+	    const message = JSON.parse(event.data);
+	    if (message.code = 20001) {
+	      if (message.message == '基础数据') {
+	        // 时程曲线
+	        let xresData = processTimeData(message.data[0], 'x');
+	        let yresData = processTimeData(message.data[0], 'y');
+	        let zresData = processTimeData(message.data[0], 'z');
+	        timeXData.value = JSON.parse(JSON.stringify(xresData));
+	        timeYData.value = JSON.parse(JSON.stringify(yresData));
+	        timeZData.value = JSON.parse(JSON.stringify(zresData));
+	        timeChartData.value = timeXData.value;
+	        
+	        // 频谱曲线
+	        xresData = processAmpData(message.data[1], 'x');
+	        yresData = processAmpData(message.data[1], 'y');
+	        zresData = processAmpData(message.data[1], 'z');
+	        amplitudeXData.value = JSON.parse(JSON.stringify(xresData));
+	        amplitudeYData.value = JSON.parse(JSON.stringify(yresData));
+	        amplitudeZData.value = JSON.parse(JSON.stringify(zresData));
+	        amplitudeChartData.value = amplitudeXData.value;
+	      } else if (message.message == '设备状态') {
+	        // 更新设备选项
+	      }
+	    }
+	  };
+	
+	  // socket错误
+	  socket1.onerror = (error) => {
+	    console.error('WebSocket error:', error);
+	  };
+	
+	  // socket关闭
+	  socket1.onclose = () => {
+	    console.log('WebSocket connection closed');
+	  };
+	});
+}
 </script>
 
 <style scoped>
@@ -501,14 +537,6 @@ watch(selectedDevice, (newValue) => {
 
 .toolbar {
 	margin-bottom: 20px;
-}
-
-.online {
-	background-color: #4CAF50;
-}
-
-.offline {
-	background-color: #B0BEC5;
 }
 
 .dashboard-cards {
@@ -522,36 +550,6 @@ watch(selectedDevice, (newValue) => {
 	border: 1px solid #E0E0E0;
 	border-radius: 8px;
 	margin-bottom: 10px;
-}
-
-.device-info {
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-}
-
-.device-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  padding: 5px;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.device-label {
-  color: #555;
-  font-weight: bold;
-}
-
-.device-value {
-  color: #1890FF;
-}
-
-.device-item:last-child {
-  border-bottom: none;
 }
 
 .axis-buttons {
