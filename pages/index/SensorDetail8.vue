@@ -37,27 +37,16 @@
       </view>
       <!-- 限值设置 -->
       <view class="input-group">
-        <text class="label">限值设置：</text>
+        <text class="label">限值：</text>
         <input type="number" v-model="limitValue" class="input-field" />
         <button class="confirm-button" @click="confirmLimit">确认</button>
       </view>
-      <!-- 增益系数 -->
-      <view class="input-group">
-        <text class="label">增益系数：</text>
-        <input type="number" v-model="gainValue" class="input-field" />
-        <button class="confirm-button" @click="confirmGain">确认</button>
-      </view>
-      <!-- 设备查找 -->
-      <view class="input-group">
-        <text class="label">设备查找：</text>
-        <input type="text" v-model="deviceSearch" class="input-field" />
-        <button class="confirm-button" @click="confirmSearch">确定</button>
-      </view>
+      
       <!-- 按钮组 -->
       <view class="button-group">
         <button class="blue-button" @click="togglePeak">关闭峰值</button>
         <button class="blue-button" @click="toggleValid">关有效值</button>
-        <button class="green-button" @click="goToSelectDevice">选择设备</button>
+        <button class="green-button" @click="goToSelectDevice">查看曲线</button>
       </view>
     </view>
   </view>
@@ -106,7 +95,7 @@ export default {
     },
     goToSelectDevice() {
       uni.navigateTo({
-        url: '/pages/index/SelectDeviceB'
+        url: '/pages/index/index04'
       });
     }
   }

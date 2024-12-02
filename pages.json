@@ -22,17 +22,17 @@
 			}
 		},
 		{
-			"path" : "pages/index/BuildingA",
+			"path" : "pages/index/Building1",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼"
+				"navigationBarTitleText" : "同济综合楼"
 			}
 		},
 		{
-			"path" : "pages/index/BuildingB",
+			"path" : "pages/index/Building2",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大学综合楼"
+				"navigationBarTitleText" : "同济大学A楼"
 			}
 		},
 		{
@@ -43,10 +43,24 @@
 			}
 		},
 		{
-			"path" : "pages/index/BuildingA/02",
+			"path" : "pages/index/SensorDetail8",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济大厦A楼设备"
+				"navigationBarTitleText" : "同济大厦A楼04设备"
+			}
+		},
+		{
+			"path" : "pages/index/SensorDetail9",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼03设备"
+			}
+		},
+		{
+			"path" : "pages/index/SensorDetail10",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼02设备"
 			}
 		},
 		{
@@ -57,10 +71,24 @@
 			}
 		},
 		{
-			"path" : "pages/index/SelectDeviceB",
+			"path" : "pages/index/index02",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济综合楼设备选择"
+				"navigationBarTitleText" : "同济大厦A楼02设备"
+			}
+		},
+		{
+			"path" : "pages/index/index03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼03设备"
+			}
+		},
+		{
+			"path" : "pages/index/index04",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼04设备"
 			}
 		}
 	],

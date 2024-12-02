@@ -1,14 +1,10 @@
 <template>
   <view class="building-container">
-    <view class="prompt">请选择所要查看的建筑</view>
+    <view class="prompt">请选择检测设备所在的建筑</view>
     <view class="building-box">
-      <view class="building-item" @click="goToBuilding('A')">
-        <image src="@/static/AFloor.png" mode="aspectFill" class="building-image"></image>
-        <view class="building-name">同济大厦A楼</view>
-      </view>
-      <view class="building-item" @click="goToBuilding('B')">
-        <image src="@/static/BFloor.png" mode="aspectFill" class="building-image"></image>
-        <view class="building-name">同济大学综合楼</view>
+      <view v-for="building in buildings" :key="building.buildingId" class="building-item" @click="goToBuilding(building.buildingId)">
+        <image :src="building.imageUrl" mode="aspectFill" class="building-image"></image>
+        <view class="building-name">{{ building.name }}</view>
       </view>
     </view>
   </view>
@@ -16,13 +12,34 @@
 
 <script>
 export default {
+  data() {
+    return {
+      buildings: [] // 用于存储从API获取的建筑数据
+    };
+  },
   methods: {
-    goToBuilding(building) {
-      const url = building === 'A' ? '/pages/index/BuildingA' : '/pages/index/BuildingB';
+    fetchBuildings() {
+      const url = 'http://110.42.214.164:8003/building';
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          if (data.code === 200 && data.data) {
+            this.buildings = data.data;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching buildings:', error);
+        });
+    },
+    goToBuilding(buildingId) {
+      const url = `/pages/index/Building${buildingId}`;
       uni.navigateTo({
         url
       });
     }
+  },
+  mounted() {
+    this.fetchBuildings(); // 在组件挂载时获取建筑数据
   }
 }
 </script>

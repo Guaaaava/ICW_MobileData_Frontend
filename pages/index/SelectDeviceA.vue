@@ -1,16 +1,25 @@
 <template>
   <div class="device-list">
+    <!-- 提示信息 -->
+    <div v-if="showUnavailableMessage" class="warning-message">
+      红色设备暂时不可用，请选择绿色设备
+    </div>
+    
+    <!-- 设备按钮 -->
     <button
-      v-for="(device, index) in devices" 
-      :key="index" 
+      v-for="sensor in sensors"
+      :key="sensor.sensorId"
       class="device-button"
-      :class="{'available': isAvailable(index), 'selected': isSelected(index)}"
-      @click="selectDevice(index)"
-      :disabled="!isAvailable(index)"
+      :class="{
+        'available': sensor.status === '1',
+        'unavailable': sensor.status === '0',
+        'scale-110': sensor.sensorId === selectedSensorId
+      }"
+      @click="handleSensorClick(sensor)"
     >
-      {{ device.location }}
+      {{ sensor.building }} - {{ sensor.number }}
     </button>
-    <button class="confirm-button" @click="confirmSelection">确定</button>
+    <button class="confirm-button" @click="confirmSelection">进入设备具体设置</button>
   </div>
 </template>
 
@@ -18,36 +27,52 @@
 export default {
   data() {
     return {
-      devices: [
-        { id: 'A77C5238', location: 'A楼01' },
-        { id: 'F853ED49', location: 'A楼02' },
-        { id: '87C3D4E4', location: 'A楼03' },
-        { id: '9A0D1958', location: 'A楼04' },
-        { id: '00000000', location: 'A楼05' },
-        { id: '00000000', location: 'A楼06' }
-      ],
-      selectedDeviceIndex: null
+      sensors: [],
+      selectedSensorId: null,
+      showUnavailableMessage: false // 控制提示信息的显示
     };
   },
   methods: {
-    isAvailable(index) {
-      return index >= 1 && index <= 3; // 假设02到04是可用的
+    fetchSensors() {
+      fetch('http://110.42.214.164:8003/sensor')
+        .then(response => response.json())
+        .then(data => {
+          if (data.code === 200 && data.data) {
+            this.sensors = data.data;
+            // 检查是否有红色设备（即不可用设备）
+            this.showUnavailableMessage = this.sensors.some(sensor => sensor.status === '0');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching sensors:', error);
+        });
     },
-    isSelected(index) {
-      return this.selectedDeviceIndex === index;
-    },
-    selectDevice(index) {
-      if (this.isAvailable(index)) {
-        this.selectedDeviceIndex = index;
+    handleSensorClick(sensor) {
+      if (sensor.status === '0') {
+        uni.showToast({
+          title: '该设备暂时不可用',
+          icon: 'none'
+        });
+      } else {
+        this.selectedSensorId = sensor.sensorId;
+        // 导航到选中的传感器详情页面
+        uni.navigateTo({
+          url: `/pages/index/SensorDetail/${this.selectedSensorId}`
+        });
       }
     },
     confirmSelection() {
-      uni.navigateTo({
-        url: '/pages/index/BuildingA/01'
-      });
+      if (this.selectedSensorId !== null) {
+        uni.navigateTo({
+          url: `/pages/index/SensorDetail/${this.selectedSensorId}`
+        });
+      }
     }
+  },
+  mounted() {
+    this.fetchSensors();
   }
-};
+}
 </script>
 
 <style scoped>
@@ -71,6 +96,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .device-button.available {
@@ -78,10 +105,14 @@ export default {
   color: white;
 }
 
-.device-button.selected {
-  background-color: #2196f3;
-  color: white;
-  transform: scale(1.05);
+.device-button.unavailable {
+  background-color: #ffcdd2;
+  color: #333;
+}
+
+.device-button.scale-110 {
+  transform: scale(1.1);
+  transition: transform 0.2s;
 }
 
 .confirm-button {
@@ -95,17 +126,21 @@ export default {
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .confirm-button:hover {
   background-color: #1976d2;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+/* 提示信息样式 */
+.warning-message {
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #f44336; /* 红色背景 */
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
 }
 </style>
