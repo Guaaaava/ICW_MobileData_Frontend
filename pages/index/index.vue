@@ -171,6 +171,7 @@ const getDeviceThisBuilding = async () => {
 		if (response.data.msg === 'success') {
 			deviceThisBuilding.value = response.data.data as Device[];
 			setDeviceSelectList(); // 获取到数据后，立即配置设备选择列表（解决设备列表有时为空的Bug）
+			selectedDeviceIndex.value = findSelectedDeviceIndex(selectedDeviceId.value); // 立即设置默认选项
 			// console.log('DeviceThisBuilding.value: ', deviceThisBuilding.value);
 		} else {
 			console.log('Warning: getDeviceThisBuilding responds failed.');
@@ -580,7 +581,6 @@ onShow(() => {
 	getBuildingName(); // 获取当前建筑信息
 	getSelectedDeviceId(); // 获取选择的设备信息
 	getDeviceThisBuilding(); // 获取当前建筑所有设备信息，并立即配置设备选择列表
-	selectedDeviceIndex.value = findSelectedDeviceIndex(selectedDeviceId.value); // 设置默认选项
 	getSelectedAxis(); // 获取选择的方向
 	
 	// getTimeData();
