@@ -14,7 +14,9 @@
 		
 		<!-- 数据图表 -->
 		<view class="dashboard-cards">
-			<text>时程曲线</text>
+			<view class="chart-info">
+				<text>时程曲线：峰值-{{ timeDataPV[curAxisIndex] }}，有效值-{{ timeDataRMS[curAxisIndex] }}</text>
+			</view>
 			<view class="card">
 				<qiun-data-charts
 					type="line"
@@ -24,7 +26,9 @@
 				/>
 			</view>
 			
-			<text>频谱曲线</text>
+			<view class="chart-info">
+				<text>频谱曲线：峰值-{{ amplitudeDataPV[curAxisIndex] }}，有效值-{{ amplitudeDataRMS[curAxisIndex] }}</text>
+			</view>
 			<view class="card">
 				<qiun-data-charts
 					type="line"
@@ -267,6 +271,8 @@ let timeXData = ref([]);
 let timeYData = ref([]);
 let timeZData = ref([]);
 let timeChartData = ref([]);
+let timeDataRMS = ref<number[]>([0, 0, 0]); // 时程曲线 X、Y、Z 三轴的有效值
+let timeDataPV = ref<number[]>([0, 0, 0]); // 时程曲线 X、Y、Z 三轴的峰值
 
 // 测试数据：11.30的数据
 let timeDataStart = 1732952781107;
@@ -298,6 +304,7 @@ const getTimeData = async () => {
 		if (response.data.msg === 'success') {
 			let xresponse = response.data.data as any;
 			timeXData.value = JSON.parse(JSON.stringify(processTimeData(xresponse)));
+			timeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(xresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getXTimeData responds failed.');
@@ -311,6 +318,7 @@ const getTimeData = async () => {
 		if (response.data.msg === 'success') {
 			let yresponse = response.data.data as any;
 			timeYData.value = JSON.parse(JSON.stringify(processTimeData(yresponse)));
+			timeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(yresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getYTimeData responds failed.');
@@ -324,6 +332,7 @@ const getTimeData = async () => {
 		if (response.data.msg === 'success') {
 			let zresponse = response.data.data as any;
 			timeZData.value = JSON.parse(JSON.stringify(processTimeData(zresponse)));
+			timeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(zresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getZTimeData responds failed.');
@@ -362,6 +371,8 @@ let amplitudeXData = ref([]);
 let amplitudeYData = ref([]);
 let amplitudeZData = ref([]);
 let amplitudeChartData = ref([]);
+let amplitudeDataRMS = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的有效值
+let amplitudeDataPV = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的峰值
 
 // 测试数据：11.30的数据
 let ampDataStart = 1732952781107;
@@ -392,6 +403,7 @@ const getAmplitudeData = async () => {
 		if (response.data.msg === 'success') {
 			let xresponse = response.data.data as any;
 			amplitudeXData.value = JSON.parse(JSON.stringify(processAmpData(xresponse)));
+			amplitudeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(xresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getXAmplitudeData respond failed.');
@@ -405,6 +417,7 @@ const getAmplitudeData = async () => {
 		if (response.data.msg === 'success') {
 			let yresponse = response.data.data as any;
 			amplitudeYData.value = JSON.parse(JSON.stringify(processAmpData(yresponse)));
+			amplitudeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(yresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getYAmplitudeData responds failed.');
@@ -418,6 +431,7 @@ const getAmplitudeData = async () => {
 		if (response.data.msg === 'success') {
 			let zresponse = response.data.data as any;
 			amplitudeZData.value = JSON.parse(JSON.stringify(processAmpData(zresponse)));
+			amplitudeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(zresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getZAmplitudeData responds failed.');
@@ -616,6 +630,13 @@ onUnload(() => {
 	justify-content: space-between;
 	gap: 20px;
 	margin-bottom: 20px;
+}
+
+.chart-info {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 margin-bottom: 1vh;
 }
 
 .card {

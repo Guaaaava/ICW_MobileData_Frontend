@@ -1733,47 +1733,22 @@ to {
 .toolbar[data-v-1cf27b2a] {
 	margin-bottom: 20px;
 }
-.online[data-v-1cf27b2a] {
-	background-color: #4CAF50;
-}
-.offline[data-v-1cf27b2a] {
-	background-color: #B0BEC5;
-}
 .dashboard-cards[data-v-1cf27b2a] {
 	display: block;
 	justify-content: space-between;
 	gap: 20px;
 	margin-bottom: 20px;
 }
+.chart-info[data-v-1cf27b2a] {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 margin-bottom: 1vh;
+}
 .card[data-v-1cf27b2a] {
 	border: 1px solid #E0E0E0;
 	border-radius: 8px;
 	margin-bottom: 10px;
-}
-.device-info[data-v-1cf27b2a] {
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-}
-.device-item[data-v-1cf27b2a] {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  padding: 5px;
-  border-bottom: 1px solid #eaeaea;
-}
-.device-label[data-v-1cf27b2a] {
-  color: #555;
-  font-weight: bold;
-}
-.device-value[data-v-1cf27b2a] {
-  color: #1890FF;
-}
-.device-item[data-v-1cf27b2a]:last-child {
-  border-bottom: none;
 }
 .axis-buttons[data-v-1cf27b2a] {
   display: flex;
