@@ -1,9 +1,9 @@
 <template>
   <div class="device-list">
-	  <!-- 提示信息 -->
-	     <div v-if="showUnavailableMessage" class="warning-message">
-	       红色设备暂时不可用，请选择绿色设备
-	     </div>
+    <!-- 提示语 -->
+    <div class="prompt-message">
+      请您选择<span class="highlight">A楼</span>的设备:
+    </div>
     <!-- 设备按钮 -->
     <button
       v-for="sensor in sensors"
@@ -17,8 +17,12 @@
       @click="handleSensorClick(sensor)"
     >
       {{ sensor.building }} - {{ sensor.number }}
+      <!-- 在不可用的按钮上添加覆盖整个按钮的× -->
+      <span v-if="sensor.status === '0'" class="unavailable-indicator">X</span>
     </button>
-    <button class="confirm-button" @click="confirmSelection">进入设备具体设置</button>
+	<div class="unavailable-message">
+	  标红设备暂时不可用
+	</div>
   </div>
 </template>
 
@@ -28,17 +32,12 @@ export default {
     return {
       sensors: [],
       selectedSensorId: null,
-	  showUnavailableMessage: true
     };
   },
   methods: {
-    // 模拟请求获取传感器数据
     fetchSensors() {
-      // 假设你想要传递一个 building 参数
-      const building = 'A楼'; // 假设传入的参数是 A楼
-      const encodedBuilding = encodeURIComponent(building); // 编码传入参数
-
-      // 构造请求 URL
+      const building = 'A楼';
+      const encodedBuilding = encodeURIComponent(building);
       const url = `http://110.42.214.164:8003/sensor/${encodedBuilding}`;
 
       fetch(url)
@@ -60,14 +59,6 @@ export default {
         });
       } else {
         this.selectedSensorId = sensor.sensorId;
-        // 导航到选中的传感器详情页面
-        uni.navigateTo({
-          url: `/pages/index/SensorDetail/${this.selectedSensorId}`
-        });
-      }
-    },
-    confirmSelection() {
-      if (this.selectedSensorId !== null) {
         uni.navigateTo({
           url: `/pages/index/SensorDetail${this.selectedSensorId}`
         });
@@ -80,12 +71,21 @@ export default {
 }
 </script>
 
-
 <style scoped>
 .device-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.prompt-message {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.highlight {
+  color: #ff8f33; /* 强调A楼的颜色 */
+  font-weight: bold;
 }
 
 .device-button {
@@ -121,32 +121,27 @@ export default {
   transition: transform 0.2s;
 }
 
-.confirm-button {
-  width: 200px;
-  height: 60px;
-  margin: 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: #e0f7fa;
-  color: #333;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.confirm-button:hover {
-  background-color: #1976d2;
-}
-
-/* 提示信息样式 */
-.warning-message {
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #f44336; /* 红色背景 */
+.unavailable-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5); /* 半透明红色背景 */
   color: white;
-  font-size: 18px;
-  border-radius: 8px;
-  font-weight: bold;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 提示框样式 */
+.unavailable-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
   text-align: center;
 }
 </style>

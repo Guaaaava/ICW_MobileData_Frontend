@@ -14,28 +14,82 @@
 </template>
 
 <script>
+	const BASE_URL ="http://110.42.214.164:8008/account";
 export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      loading: false,
     };
   },
   methods: {
-    login() {
-      // 使用 uni.navigateTo 跳转到数据展示页面
-      uni.navigateTo({
-        url: '/pages/index/SelectBuilding'
-      });
-    },
-    register() {
-      // 使用 uni.navigateTo 跳转到注册页面
-      uni.navigateTo({
-        url: '/pages/index/Register'
-      });
-    }
-  }
-}
+    async login() {
+      if (!this.username || !this.password) {
+        uni.showToast({
+          title: '用户名或密码不能为空',
+          icon: 'none',
+        });
+        return;
+      }
+
+      this.loading = true; // 开始加载
+      
+     try {
+           // 发送登录请求
+           const response = await uni.request({
+             url: `${BASE_URL}/login`, // 替换为实际的登录API地址
+             method: 'POST',
+             data: {
+               username: this.username,
+               password: this.password,
+             },
+           });
+     
+           // 检查后端响应
+           if (response.data && response.data.authentication) {
+             // 登录成功逻辑
+             if (response.data.authentication === true) {
+               uni.showToast({
+                 title: '登录成功',
+                 icon: 'success',
+               });
+               // 保存token等操作
+               // 例如：保存token到本地存储
+               // uni.setStorageSync('userToken', response.data.token);
+               // 跳转到首页或其他页面
+               setTimeout(() => {
+                 uni.navigateTo({
+                   url: '/pages/index/Guide',
+                 });
+               }, 1000);
+             } else {
+               // 登录失败逻辑
+               uni.showToast({
+                 title: response.data.message || '登录失败',
+                 icon: 'none',
+               });
+             }
+           } else {
+             // 响应数据不符合预期
+             uni.showToast({
+               title: '登录失败：账号或者密码错误',
+               icon: 'none',
+             });
+           }
+         } catch (error) {
+           // 网络或其他错误处理
+           uni.showToast({
+             title: '网络错误，请稍后再试',
+             icon: 'none',
+           });
+           console.error('请求错误：', error);
+         } finally {
+           this.loading = false; // 结束加载
+         }
+       },
+     },
+};
 </script>
 
 <style>

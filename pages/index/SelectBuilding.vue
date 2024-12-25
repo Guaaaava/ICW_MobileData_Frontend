@@ -4,7 +4,7 @@
     <view class="building-box">
       <view v-for="building in buildings" :key="building.buildingId" class="building-item" @click="goToBuilding(building.buildingId)">
         <image :src="building.imageUrl" mode="aspectFill" class="building-image"></image>
-        <view class="building-name">{{ building.name }}</view>
+        <view class="building-name">同济大学 {{ building.name }}</view>
       </view>
     </view>
   </view>

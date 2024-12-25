@@ -4,13 +4,15 @@
       <!-- 选择台阵 -->
       <picker mode="selector" :range="array" @change="onPickerChange">
         <view class="picker">
-          台阵选择：{{ array[selectedIndex] }}
+          <text class="picker-label">台阵选择：</text>
+          <text class="picker-value">{{ array[selectedIndex] }}</text>
         </view>
       </picker>
       <!-- 方向选择 -->
       <picker mode="selector" :range="['X', 'Y', 'Z']" @change="onDirectionPickerChange">
         <view class="picker">
-          方向选择：{{ ['X', 'Y', 'Z'][directionIndex] }}
+          <text class="picker-label">方向选择：</text>
+          <text class="picker-value">{{ ['X', 'Y', 'Z'][directionIndex] }}</text>
         </view>
       </picker>
       <!-- 台阵名称 -->
@@ -102,143 +104,165 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   height: 100vh;
-  background-color: #f0f4f8;
+  background-color: #f5f7fa;
 }
 
 .box {
-  width: 90%;
-  max-width: 400px;
-  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .picker {
-  padding: 8px;
-  border: 1px solid #cccccc;
-  margin-bottom: 15px;
-  border-radius: 5px;
+  padding: 12px;
+  border: 1px solid #d1d8e1;
+  margin-bottom: 20px;
+  border-radius: 8px;
   font-size: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fafafa;
+}
+
+.picker-label {
+  color: #666666;
+}
+
+.picker-value {
+  font-weight: bold;
+  color: #4a90e2;
 }
 
 .input-group {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .label {
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 12px;
   color: #333333;
 }
 
 .value {
-  color: #666666;
+  color: #888888;
+  font-size: 14px;
 }
 
 .input-field {
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  padding: 8px;
+  border: 1px solid #d1d8e1;
+  border-radius: 8px;
+  padding: 10px;
   margin-right: 10px;
   flex-grow: 1;
+  font-size: 14px;
 }
 
 .scale-control {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .scale-label {
-  margin-right: 10px;
+  margin-right: 12px;
   font-size: 16px;
   color: #333333;
 }
 
 .scale-text {
-  margin: 0 10px;
+  margin: 0 15px;
   font-weight: bold;
   color: #333333;
 }
 
 .scale-button {
-  background-color: #4a90e2;
+  background: linear-gradient(145deg, #4a90e2, #357ab8);
   border: none;
-  padding: 2px 5px;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
   color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
 .scale-button:hover {
-  background-color: #357ab8;
+  transform: scale(1.1);
 }
 
 .confirm-button {
-  background-color: #4a90e2;
+  background: linear-gradient(145deg, #4a90e2, #357ab8);
   color: white;
   border: none;
-  padding: 2px 15px;
-  border-radius: 5px;
+  padding: 6px 18px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 10px;
   display: flex;
   align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
 .confirm-button:hover {
-  background-color: #357ab8;
+  transform: scale(1.1);
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .blue-button {
-  background-color: #4a90e2;
+  background: linear-gradient(145deg, #4a90e2, #357ab8);
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 12px 18px;
+  border-radius: 8px;
   cursor: pointer;
   flex: 1;
-  margin: 0 5px;
+  margin: 0 8px;
   display: flex;
   align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
 }
 
 .blue-button:hover {
-  background-color: #357ab8;
+  transform: scale(1.1);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .green-button {
-  background-color: #e2bcb1;
+  background: linear-gradient(145deg, #e2bcb1, #e29f80);
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 12px 18px;
+  border-radius: 8px;
   cursor: pointer;
   flex: 1;
-  margin: 0 5px;
+  margin: 0 8px;
   display: flex;
   align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
 }
 
 .green-button:hover {
-  background-color: #357ab8;
+  transform: scale(1.1);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 </style>

@@ -25,7 +25,7 @@
 			"path" : "pages/index/Building1",
 			"style" : 
 			{
-				"navigationBarTitleText" : "同济综合楼"
+				"navigationBarTitleText" : "同济大学综合楼"
 			}
 		},
 		{
@@ -89,6 +89,41 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "同济大厦A楼04设备"
+			}
+		},
+		{
+			"path" : "pages/index/device9A0D1958",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼03设备"
+			}
+		},
+		{
+			"path" : "pages/index/Guide",
+			"style" : 
+			{
+				"navigationBarTitleText" : "欢迎登录"
+			}
+		},
+		{
+			"path" : "pages/index/AbnormalGuide",
+			"style" : 
+			{
+				"navigationBarTitleText" : "异常数据选择"
+			}
+		},
+		{
+			"path" : "pages/abnormal/Building1",
+			"style" : 
+			{
+				"navigationBarTitleText" : "综合楼异常数据"
+			}
+		},
+		{
+			"path" : "pages/abnormal/Building2",
+			"style" : 
+			{
+				"navigationBarTitleText" : "A楼异常数据"
 			}
 		}
 	],

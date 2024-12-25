@@ -14,7 +14,9 @@
 		
 		<!-- 数据图表 -->
 		<view class="dashboard-cards">
-			<text>时程曲线</text>
+			<view class="chart-info">
+				<text>时程曲线-{{ axisOrder[curAxisIndex] }}：峰值-{{ timeDataPV[curAxisIndex] }}，有效值-{{ timeDataRMS[curAxisIndex] }}</text>
+			</view>
 			<view class="card">
 				<qiun-data-charts
 					type="line"
@@ -24,7 +26,9 @@
 				/>
 			</view>
 			
-			<text>频谱曲线</text>
+			<view class="chart-info">
+				<text>频谱曲线-{{ axisOrder[curAxisIndex] }}：峰值-{{ amplitudeDataPV[curAxisIndex] }}，有效值-{{ amplitudeDataRMS[curAxisIndex] }}</text>
+			</view>
 			<view class="card">
 				<qiun-data-charts
 					type="line"
@@ -45,9 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { onShow, onHide, onUnload } from '@dcloudio/uni-app';
+import { onShow, onUnload } from '@dcloudio/uni-app';
 import { ref } from 'vue';
-import axios from 'axios';
+import store from '@/store/index.js';
 
 /*-- 设备信息接口		--
 	-- 数据来源：后端数据库 --*/
@@ -98,7 +102,18 @@ let selectedDeviceId = ref<string>(''); // 选择的设备ID
 let selectedDeviceIndex = ref<number>(0); // 选择的设备在选项列表中的下标
 
 // 方法：从服务器获取所有设备信息
+import { GetAllDevices } from '@/request/api.js';
 const getAllDevices = async () => {
+	GetAllDevices()
+		.then((res) => {
+			// console.log('GetAllDevices response: ', res);
+			allDevices.value = res.data.data as Device[];
+		})
+		.catch((error) => {
+			console.error('Error getting all devices: ', error);
+		});
+	
+	/*-- axios 格式 --
 	const url = 'http://110.42.214.164:8003/sensor';
 	try {
 		const response = await axios.get(url);
@@ -111,6 +126,7 @@ const getAllDevices = async () => {
 	} catch (error) {
 		console.error('Error getting all devices: ', error);
 	}
+	---------------*/
 	
 	/*-- 示例数据 --
 	allDevices.value = [
@@ -164,13 +180,27 @@ const getSelectedAxis = () => {
 }
 
 // 方法：从服务器获取当前建筑所有设备信息
+import { GetDeviceThisBuilding } from '@/request/api.js';
 const getDeviceThisBuilding = async () => {
+	GetDeviceThisBuilding(encodeURIComponent(buildingName.value))
+		.then((res) => {
+			// console.log('GetDeviceThisBuilding response: ', res);
+			deviceThisBuilding.value = res.data as Device[];
+			setDeviceSelectList(); // 获取到数据后，立即配置设备选择列表（解决设备列表有时为空的Bug）
+			selectedDeviceIndex.value = findSelectedDeviceIndex(selectedDeviceId.value); // 立即设置默认选项
+		})
+		.catch((error) => {
+			console.error('Error getting device this building: ', error);
+		});
+	
+	/*-- axios 格式 --
 	const url = `http://110.42.214.164:8003/sensor/${encodeURIComponent(buildingName.value)}`;
 	try {
 		const response = await axios.get(url);
 		if (response.data.msg === 'success') {
 			deviceThisBuilding.value = response.data.data as Device[];
 			setDeviceSelectList(); // 获取到数据后，立即配置设备选择列表（解决设备列表有时为空的Bug）
+			selectedDeviceIndex.value = findSelectedDeviceIndex(selectedDeviceId.value); // 立即设置默认选项
 			// console.log('DeviceThisBuilding.value: ', deviceThisBuilding.value);
 		} else {
 			console.log('Warning: getDeviceThisBuilding responds failed.');
@@ -178,6 +208,7 @@ const getDeviceThisBuilding = async () => {
 	} catch (error) {
 		console.error('Error getting device this building: ', error);
 	}
+	---------------*/
 	
 	/*-- 示例数据 --
 	allDevices.value = [
@@ -205,6 +236,8 @@ const getDeviceThisBuilding = async () => {
 
 // 方法：设置设备选项
 const setDeviceSelectList = () => {	
+	deviceSelectList.value.length = 0; // 先清空原列表
+	
 	deviceThisBuilding.value.forEach((device, index) => {
 		let deviceLabel = device.building + device.number + '-' + device.device + '-' +
 											(device.status === '1' ? '可用' : '不可用');
@@ -264,6 +297,9 @@ let timeXData = ref([]);
 let timeYData = ref([]);
 let timeZData = ref([]);
 let timeChartData = ref([]);
+let timeDataRMS = ref<number[]>([0, 0, 0]); // 时程曲线 X、Y、Z 三轴的有效值
+let timeDataPV = ref<number[]>([0, 0, 0]); // 时程曲线 X、Y、Z 三轴的峰值
+let timeDataThreshold: number = 0.5; // 时程数据异常值（加速度）
 
 // 测试数据：11.30的数据
 let timeDataStart = 1732952781107;
@@ -277,24 +313,41 @@ const timeChartOpts = ref({
 	padding: [20, 30, 0, 5],
 	xAxis: { axisLine: false, boundaryGap: 'justify', labelCount: 6 },
 	yAxis: { gridType: 'solid', data: [{ min: -0.6, max: 0.6 }] },
-	extra: { markLine: { data: [{ value: 0, showLabel: true, labelOffsetX: -10 }] } }
+	extra: { markLine: { data: [
+		{ value: 0, lineColor: '#000000', showLabel: true, labelOffsetX: -10 }, // 中轴标记线
+		{ value: timeDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -10 }, // 正阈值标记线
+		{ value: -timeDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -10 }, // ### Question 阈值需要负的吗？
+	] } }
 });
 
 // 方法：获取时程曲线 X、Y、Z 轴数据
+import { GetTimeXData, GetTimeYData, GetTimeZData } from '@/request/api.js';
 const getTimeData = async () => {
 	// const timeStamp = Date.now();
 	const timeStamp = timeDataStart; // 测试数据：11.30
 	
-	const xDataUrl = `http://110.42.214.164:8003/timeSeries/X/${timeStamp}/${selectedDeviceId.value}`;
-	const yDataUrl = `http://110.42.214.164:8003/timeSeries/Y/${timeStamp}/${selectedDeviceId.value}`;
-	const zDataUrl = `http://110.42.214.164:8003/timeSeries/Z/${timeStamp}/${selectedDeviceId.value}`;
-	
 	// X 轴数据
+	GetTimeXData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetTimeXData response: ', res);
+			let xresponse = res.data as any;
+			timeXData.value = JSON.parse(JSON.stringify(processTimeData(xresponse)));
+			timeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkTimeData(xresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting X time Data: ', error);
+		});
+		
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(xDataUrl);
 		if (response.data.msg === 'success') {
 			let xresponse = response.data.data as any;
 			timeXData.value = JSON.parse(JSON.stringify(processTimeData(xresponse)));
+			timeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(xresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getXTimeData responds failed.');
@@ -302,12 +355,29 @@ const getTimeData = async () => {
 	} catch (error) {
 		console.error('Error getting X time Data: ', error);
 	}
+	---------------*/
+	
 	// Y 轴数据
+	GetTimeYData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetTimeYData response: ', res);
+			let yresponse = res.data as any;
+			timeYData.value = JSON.parse(JSON.stringify(processTimeData(yresponse)));
+			timeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkTimeData(yresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting Y time Data: ', error);
+		});
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(yDataUrl);
 		if (response.data.msg === 'success') {
 			let yresponse = response.data.data as any;
 			timeYData.value = JSON.parse(JSON.stringify(processTimeData(yresponse)));
+			timeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(yresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getYTimeData responds failed.');
@@ -315,12 +385,29 @@ const getTimeData = async () => {
 	} catch (error) {
 		console.error('Error getting Y time Data: ', error);
 	}
+	---------------*/
+	
 	// Z 轴数据
+	GetTimeZData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetTimeZData response: ', res);
+			let zresponse = res.data as any;
+			timeZData.value = JSON.parse(JSON.stringify(processTimeData(zresponse)));
+			timeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkTimeData(zresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting Z time Data: ', error);
+		});
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(zDataUrl);
 		if (response.data.msg === 'success') {
 			let zresponse = response.data.data as any;
 			timeZData.value = JSON.parse(JSON.stringify(processTimeData(zresponse)));
+			timeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkTimeData(zresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getZTimeData responds failed.');
@@ -328,6 +415,7 @@ const getTimeData = async () => {
 	} catch (error) {
 		console.error('Error getting Z time Data: ', error);
 	}
+	---------------*/
 	
 	// 根据选择的方向配置数据
 	if (curAxisIndex.value === 0) {
@@ -353,12 +441,20 @@ const processTimeData = (originalData: any) => {
 	return resData;
 }
 
+// 方法：计算时程数据峰值
+const calculateTimePV = (data: number[]) => {
+	return (data.length > 0 ? Math.max(...data) : undefined);
+}
+
 /*-- 频谱曲线：X 轴为频率(0-63) --
 	--					Y 轴为幅值 			--*/
 let amplitudeXData = ref([]);
 let amplitudeYData = ref([]);
 let amplitudeZData = ref([]);
 let amplitudeChartData = ref([]);
+let amplitudeDataRMS = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的有效值
+let amplitudeDataPV = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的峰值
+let ampDataThreshold: number = 0.03; // 频谱数据异常值（幅值）
 
 // 测试数据：11.30的数据
 let ampDataStart = 1732952781107;
@@ -371,24 +467,39 @@ const amplitudeChartOpts = ref({
 	dataPointShape: false,
 	padding: [20, 30, 0, 5],
 	xAxis: { boundaryGap: 'justify', labelCount: 6 },
-	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.06 }] }
+	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.06 }] },
+	extra: { markLine: { data: [
+		{ value: ampDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -8 }, // 阈值标记线
+	] } }
 });
 
 // 方法：获取频谱曲线 X、Y、Z 轴数据
+import { GetAmplitudeXData, GetAmplitudeYData, GetAmplitudeZData } from '@/request/api.js';
 const getAmplitudeData = async () => {
 	// const timeStamp = Date.now();
 	const timeStamp = ampDataStart; // 测试数据：11.30
 	
-	const xDataUrl = `http://110.42.214.164:8003/frequency/X/${timeStamp}/${selectedDeviceId.value}`;
-	const yDataUrl = `http://110.42.214.164:8003/frequency/Y/${timeStamp}/${selectedDeviceId.value}`;
-	const zDataUrl = `http://110.42.214.164:8003/frequency/Z/${timeStamp}/${selectedDeviceId.value}`;
-	
 	// X 轴数据
+	GetAmplitudeXData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetAmplitudeXData response: ', res);
+			let xresponse = res.data as any;
+			amplitudeXData.value = JSON.parse(JSON.stringify(processAmpData(xresponse)));
+			amplitudeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkAmpData(xresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting X amplitude Data: ', error);
+		});
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(xDataUrl);
 		if (response.data.msg === 'success') {
 			let xresponse = response.data.data as any;
 			amplitudeXData.value = JSON.parse(JSON.stringify(processAmpData(xresponse)));
+			amplitudeDataRMS.value[0] = parseFloat(xresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(xresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getXAmplitudeData respond failed.');
@@ -396,12 +507,29 @@ const getAmplitudeData = async () => {
 	} catch (error) {
 		console.error('Error getting X amplitude Data: ', error);
 	}
+	---------------*/
+	
 	// Y 轴数据
+	GetAmplitudeYData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetAmplitudeYData response: ', res);
+			let yresponse = res.data as any;
+			amplitudeYData.value = JSON.parse(JSON.stringify(processAmpData(yresponse)));
+			amplitudeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkAmpData(yresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting Y amplitude Data: ', error);
+		});
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(yDataUrl);
 		if (response.data.msg === 'success') {
 			let yresponse = response.data.data as any;
 			amplitudeYData.value = JSON.parse(JSON.stringify(processAmpData(yresponse)));
+			amplitudeDataRMS.value[1] = parseFloat(yresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(yresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getYAmplitudeData responds failed.');
@@ -409,12 +537,29 @@ const getAmplitudeData = async () => {
 	} catch (error) {
 		console.error('Error getting Y amplitude Data: ', error);
 	}
+	---------------*/
+	
 	// Z 轴数据
+	GetAmplitudeZData(timeStamp, selectedDeviceId.value)
+		.then((res) => {
+			// console.log('GetAmplitudeZData response: ', res);
+			let zresponse = res.data as any;
+			amplitudeZData.value = JSON.parse(JSON.stringify(processAmpData(zresponse)));
+			amplitudeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
+			amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3)); // 峰值保留 3 位小数
+			checkAmpData(zresponse); // 检查异常值并警报
+		})
+		.catch((error) => {
+			console.error('Error getting Z amplitude Data: ', error);
+		})
+	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.get(zDataUrl);
 		if (response.data.msg === 'success') {
 			let zresponse = response.data.data as any;
 			amplitudeZData.value = JSON.parse(JSON.stringify(processAmpData(zresponse)));
+			amplitudeDataRMS.value[2] = parseFloat(zresponse.rms.toFixed(3)); // 有效值保留 3 位小数
 			checkAmpData(zresponse); // 检查异常值并警报
 		} else {
 			console.log('Warning: getZAmplitudeData responds failed.');
@@ -422,6 +567,7 @@ const getAmplitudeData = async () => {
 	} catch (error) {
 		console.error('Error getting Z amplitude Data: ', error);
 	}
+	---------------*/
 	
 	// 根据选择的方向配置数据
 	if (curAxisIndex.value === 0) {
@@ -445,6 +591,11 @@ const processAmpData = (originalData: any) => {
 	};
 	
 	return resData;
+}
+
+// 方法：计算频谱数据峰值
+const calculateAmplitudePV = (data: number[]) => {
+	return (data.length > 0 ? Math.max(...data) : undefined);
 }
 
 /*-- 图表方向切换按钮 --*/
@@ -474,17 +625,14 @@ const changeAxis = (direction: string) => {
 
 /*-- 数据阈值与警报 --
 	--	存储异常数据		--*/
-let timeDataThreshold: number = 1; // 时程数据异常值（加速度）
-let ampDataThreshold: number = 1; // 频谱数据异常值（幅值）
-
 // 方法：获取设置的异常数据阈值
 // ### todo 需要从之前页面获取
 const getDataThreshold = () => {
 	//
 	//
 	//
-	timeDataThreshold = 1;
-	ampDataThreshold = 1;
+	timeDataThreshold = 0.5;
+	ampDataThreshold = 0.03;
 }
 	
 // 方法：检查超出阈值的时程数据，计算倍率，进行存储和警报
@@ -504,18 +652,26 @@ const checkTimeData = (originalData: any) => {
 				urgency: ratio
 			}
 			saveExceptionTimeData(exceptionTimeData);
-			
-			// 根据倍率发出警报
-			// ### todo 如何发出警报？
 		}
 	});
 }
 
 // 方法：通过 post 存储异常时程数据
 // 类型：异步函数
+import { PostTimeDataAnomaly } from '@/request/api.js';
 const saveExceptionTimeData = async (exceptionData: ExceptionTimeData) => {
-	const url = 'http://110.42.214.164:8003/TimeAnomaly';
+	PostTimeDataAnomaly(exceptionData)
+		.then((res) => {
+			console.log('PostTimeAnomaly response: ', res);
+			if (res.data.msg === 'success') {
+				console.log('Successfully uploaded time exceptional data.');
+			}
+		})
+		.catch((error) => {
+			console.error('Error post time excetional data: ', error);
+		})
 	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.post(url, exceptionData);
 		if (response.data.msg === 'success') {
@@ -524,6 +680,7 @@ const saveExceptionTimeData = async (exceptionData: ExceptionTimeData) => {
 	} catch (error) {
 		console.error('Error post time excetional data: ', error);
 	}
+	---------------*/
 }
 
 // 方法：检查超出阈值的频谱数据，计算倍率，进行存储和警报
@@ -544,18 +701,26 @@ const checkAmpData = (originalData: any) => {
 				urgency: ratio
 			}
 			saveExceptionAmpData(exceptionAmpData);
-			
-			// 根据倍率发出警报
-			// ### todo 如何发出警报？
 		}
 	});
 }
 
 // 方法：通过 post 存储异常频谱数据
 // 类型：异步函数
+import { PostAmplitudeDataAnomaly } from '@/request/api.js';
 const saveExceptionAmpData = async (exceptionData: ExceptionAmpData) => {
-	const url = 'http://110.42.214.164:8003/SpectrumAnomaly';
+	PostAmplitudeDataAnomaly(exceptionData)
+		.then((res) => {
+			console.log('PostAmplitudeAnomaly response: ', res);
+			if (res.data.msg === 'success') {
+				console.log('Successfully uploaded amplitude exceptional data.');
+			}
+		})
+		.catch((error) => {
+			console.error('Error post amplitude excetional data: ', error);
+		})
 	
+	/*-- axios 格式 --
 	try {
 		const response = await axios.post(url, exceptionData);
 		if (response.data.msg === 'success') {
@@ -564,6 +729,7 @@ const saveExceptionAmpData = async (exceptionData: ExceptionAmpData) => {
 	} catch (error) {
 		console.error('Error post amplitude excetional data: ', error);
 	}
+	---------------*/
 }
 
 /*-- 定时器 --*/
@@ -577,20 +743,14 @@ onShow(() => {
 	getAllDevices(); // 获取所有设备信息
 	getBuildingName(); // 获取当前建筑信息
 	getSelectedDeviceId(); // 获取选择的设备信息
+	getDataThreshold(); // 获取数据阈值
 	getDeviceThisBuilding(); // 获取当前建筑所有设备信息，并立即配置设备选择列表
-	selectedDeviceIndex.value = findSelectedDeviceIndex(selectedDeviceId.value); // 设置默认选项
 	getSelectedAxis(); // 获取选择的方向
 	
-	// getTimeData();
-	// getAmplitudeData();
+	// getTimeData(); // 单次测试
+	// getAmplitudeData(); // 单次测试
 	timeDataIntervalId = setInterval(getTimeData, timeDataInterval); // 获取时程曲线数据（每秒）
 	ampDataIntervalId = setInterval(getAmplitudeData, ampDataInterval); // 获取频谱曲线数据（每秒）
-});
-
-/*-- 隐藏页面 --*/
-onHide(() => {
-	clearInterval(timeDataIntervalId); // 清理时程曲线定时器
-	clearInterval(ampDataIntervalId); // 清理频谱曲线定时器
 });
 
 /*-- 卸载页面 --*/
@@ -614,6 +774,13 @@ onUnload(() => {
 	justify-content: space-between;
 	gap: 20px;
 	margin-bottom: 20px;
+}
+
+.chart-info {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 margin-bottom: 1vh;
 }
 
 .card {

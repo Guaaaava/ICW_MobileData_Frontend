@@ -1,15 +1,25 @@
 {
-  "hash": "77edeec7",
+  "hash": "8032c2f7",
   "configHash": "f4524113",
-  "lockfileHash": "40881fd5",
-  "browserHash": "1355a179",
+  "lockfileHash": "13d9e30d",
+  "browserHash": "663ff28f",
   "optimized": {
     "axios": {
       "src": "../../../../../node_modules/axios/index.js",
       "file": "axios.js",
-      "fileHash": "e6a8bb6e",
+      "fileHash": "69559429",
       "needsInterop": false
+    },
+    "element-ui": {
+      "src": "../../../../../node_modules/element-ui/lib/element-ui.common.js",
+      "file": "element-ui.js",
+      "fileHash": "fa27b3ca",
+      "needsInterop": true
     }
   },
-  "chunks": {}
+  "chunks": {
+    "chunk-CEQRFMJQ": {
+      "file": "chunk-CEQRFMJQ.js"
+    }
+  }
 }
