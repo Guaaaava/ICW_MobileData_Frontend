@@ -21,9 +21,9 @@ export const GetDeviceThisBuilding = (buildingName) => {
 }
 
 // GET 请求获取时程曲线 X 轴数据
-export const GetTimeXData = (ftime, device) => {
+export const GetTimeXData = (ftime, device, tableName) => {
 	return request({
-		url: `/timeSeries/X/${ftime}/${device}`,
+		url: `/timeSeries/X/${ftime}/${device}/${tableName}`,
 		method: 'get',
 		data: {},
 		header: {}
@@ -31,9 +31,9 @@ export const GetTimeXData = (ftime, device) => {
 }
 
 // GET 请求获取时程曲线 Y 轴数据
-export const GetTimeYData = (ftime, device) => {
+export const GetTimeYData = (ftime, device, tableName) => {
 	return request({
-		url: `/timeSeries/Y/${ftime}/${device}`,
+		url: `/timeSeries/Y/${ftime}/${device}/${tableName}`,
 		method: 'get',
 		data: {},
 		header: {}
@@ -41,9 +41,9 @@ export const GetTimeYData = (ftime, device) => {
 }
 
 // GET 请求获取时程曲线 Z 轴数据
-export const GetTimeZData = (ftime, device) => {
+export const GetTimeZData = (ftime, device, tableName) => {
 	return request({
-		url: `/timeSeries/Z/${ftime}/${device}`,
+		url: `/timeSeries/Z/${ftime}/${device}/${tableName}`,
 		method: 'get',
 		data: {},
 		header: {}
