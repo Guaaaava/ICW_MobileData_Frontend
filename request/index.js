@@ -42,23 +42,23 @@ export default (params) => {
 								success() {
 									setTimeout(() => {
 										uni.navigateTo({
-											url: "/pages/login/index",
+											url: "/pages/index/Login",
 										})
 									}, 1000);
 								},
 							});
 							break;
 						case 404:
-							uni.showToast({
-								title: '请求地址不存在...',
-								duration: 2000,
-							})
+							// uni.showToast({
+							// 	title: '请求地址不存在...',
+							// 	duration: 2000,
+							// })
 							break;
 						default:
-							uni.showToast({
-								title: '请重试...',
-								duration: 2000,
-							})
+							// uni.showToast({
+							// 	title: '请重试...',
+							// 	duration: 2000,
+							// })
 							break;
 					}
 				}
@@ -66,16 +66,16 @@ export default (params) => {
 			fail(err) {
 				console.log(err)
 				if (err.errMsg.indexOf('request:fail') !== -1) {
-					uni.showToast({
-						title: '网络异常',
-						icon: "error",
-						duration: 2000
-					})
+					// uni.showToast({
+					// 	title: '网络异常',
+					// 	icon: "error",
+					// 	duration: 2000
+					// })
 				} else {
-					uni.showToast({
-						title: '未知异常',
-						duration: 2000
-					})
+					// uni.showToast({
+					// 	title: '未知异常',
+					// 	duration: 2000
+					// })
 				}
 				reject(err);
  

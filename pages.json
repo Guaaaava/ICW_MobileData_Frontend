@@ -1,9 +1,113 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "幕墙数据展示"
+			"path" : "pages/index/Login",
+			"style" : 
+			{
+				"navigationBarTitleText" : "登录"
+			}
+		},
+		{
+			"path" : "pages/index/SelectBuilding",
+			"style" : 
+			{
+				"navigationBarTitleText" : "建筑选择"
+			}
+		},
+		{
+			"path" : "pages/index/Building1",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大学综合楼"
+			}
+		},
+		{
+			"path" : "pages/index/Building2",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大学A楼"
+			}
+		},
+		{
+			"path" : "pages/index/SensorDetail8",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼04设备",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"text": "设置",
+								"type": "none",
+								"fontSize": "20px"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/index/SensorDetail9",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼03设备",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"text": "设置",
+								"type": "none",
+								"fontSize": "16px"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/index/SensorDetail10",
+			"style" : 
+			{
+				"navigationBarTitleText" : "同济大厦A楼02设备",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"text": "设置",
+								"type": "none",
+								"fontSize": "16px"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/index/Guide",
+			"style" : 
+			{
+				"navigationBarTitleText" : "欢迎登录"
+			}
+		},
+		{
+			"path" : "pages/abnormal/AbnormalGuide",
+			"style" : 
+			{
+				"navigationBarTitleText" : "异常数据选择"
+			}
+		},
+		{
+			"path" : "pages/abnormal/Building1",
+			"style" : 
+			{
+				"navigationBarTitleText" : "综合楼异常数据"
+			}
+		},
+		{
+			"path" : "pages/abnormal/Building2",
+			"style" : 
+			{
+				"navigationBarTitleText" : "A楼异常数据"
 			}
 		}
 	],
