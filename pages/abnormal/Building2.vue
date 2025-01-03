@@ -19,11 +19,7 @@
       <table>
         <thead>
           <tr>
-            <th
-							@click="toggleFilter('time')"
-							:class="{'active': filters.time}">
-							时间▼
-						</th>
+            <th>时间</th>
             <th 
               @click="toggleFilter('direction')" 
               :class="{'active': filters.direction}">
@@ -56,11 +52,7 @@
       <table>
         <thead>
           <tr>
-            <th
-							@click="toggleFilter('time')"
-							:class="{'active': filters.time}">
-							时间▼
-						</th>
+            <th>时间</th>
             <th 
               @click="toggleFilter('direction')" 
               :class="{'active': filters.direction}">

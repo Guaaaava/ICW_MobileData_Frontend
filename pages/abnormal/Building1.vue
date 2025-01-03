@@ -13,39 +13,40 @@
         频谱曲线
       </button>
     </div>
-<!-- 时间筛选器 -->
-<div class="time-filter">
-  <label>
-    开始时间：
-    <select v-model="filters.startYear">
-      <option value="" disabled>年</option>
-      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-    </select>
-    <select v-model="filters.startMonth">
-      <option value="" disabled>月</option>
-      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
-    </select>
-    <select v-model="filters.startDay">
-      <option value="" disabled>日</option>
-      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
-    </select>
-  </label>
-  <label>
-    结束时间：
-    <select v-model="filters.endYear">
-      <option value="" disabled>年</option>
-      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
-    </select>
-    <select v-model="filters.endMonth">
-      <option value="" disabled>月</option>
-      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
-    </select>
-    <select v-model="filters.endDay">
-      <option value="" disabled>日</option>
-      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
-    </select>
-  </label>
-</div>
+		
+		<!-- 时间筛选器 -->
+		<div class="time-filter">
+		  <label>
+		    开始时间：
+		    <select v-model="filters.startYear">
+		      <option value="" disabled>年</option>
+		      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+		    </select>
+		    <select v-model="filters.startMonth">
+		      <option value="" disabled>月</option>
+		      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
+		    </select>
+		    <select v-model="filters.startDay">
+		      <option value="" disabled>日</option>
+		      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
+		    </select>
+		  </label>
+		  <label>
+		    结束时间：
+		    <select v-model="filters.endYear">
+		      <option value="" disabled>年</option>
+		      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+		    </select>
+		    <select v-model="filters.endMonth">
+		      <option value="" disabled>月</option>
+		      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>
+		    </select>
+		    <select v-model="filters.endDay">
+		      <option value="" disabled>日</option>
+		      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
+		    </select>
+		  </label>
+		</div>
 
     <!-- 异常数据表 -->
     <div v-if="activeType === 'timeCurve'" class="table-wrapper">
@@ -82,7 +83,6 @@
     </div>
 
     <div v-if="activeType === 'frequencySpectrum'" class="table-wrapper">
-      <h2>频谱曲线异常数据</h2>
       <table>
         <thead>
           <tr>
