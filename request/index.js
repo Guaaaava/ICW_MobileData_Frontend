@@ -35,18 +35,18 @@ export default (params) => {
 					uni.clearStorageSync()
 					switch (res.statusCode) {
 						case 401:
-							uni.showModal({
-								title: "提示",
-								content: "请登录",
-								showCancel: false,
-								success() {
-									setTimeout(() => {
-										uni.navigateTo({
-											url: "/pages/index/Login",
-										})
-									}, 1000);
-								},
-							});
+							// uni.showModal({
+							// 	title: "提示",
+							// 	content: "请登录",
+							// 	showCancel: false,
+							// 	success() {
+							// 		setTimeout(() => {
+							// 			uni.navigateTo({
+							// 				url: "/pages/index/Login",
+							// 			})
+							// 		}, 1000);
+							// 	},
+							// });
 							break;
 						case 404:
 							// uni.showToast({
@@ -78,7 +78,6 @@ export default (params) => {
 					// })
 				}
 				reject(err);
- 
 			},
 			complete() {
 				// 不管成功还是失败都会执行

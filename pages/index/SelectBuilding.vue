@@ -18,18 +18,36 @@ export default {
     };
   },
   methods: {
-    fetchBuildings() {
+    async fetchBuildings() {
       const url = 'http://110.42.214.164:8003/building';
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          if (data.code === 200 && data.data) {
-            this.buildings = data.data;
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching buildings:', error);
-        });
+      
+			try {
+      	const response = await uni.request({
+      		url: url,
+      		method: 'GET',
+      		data: {},
+      	});
+      	
+      	if (response.data.code === 200 && response.data.data) {
+      		this.buildings = response.data.data;
+      	} else {
+      		// 网络或其他错误处理
+      		uni.showToast({
+      		  title: '网络错误，请稍后再试',
+      		  icon: 'none',
+      			duration: 2000
+      		});
+      		console.error('网络错误：', error);
+      	}
+      } catch (error) {
+      	// 网络或其他错误处理
+      	uni.showToast({
+      	  title: '网络错误，请稍后再试',
+      	  icon: 'none',
+      		duration: 2000
+      	});
+      	console.error('请求错误：', error);
+      }
     },
     goToBuilding(buildingId) {
       const url = `/pages/index/Building${buildingId}`;
@@ -59,7 +77,7 @@ export default {
 }
 
 .prompt {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;

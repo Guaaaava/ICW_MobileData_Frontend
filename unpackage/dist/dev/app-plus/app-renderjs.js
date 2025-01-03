@@ -7393,6 +7393,21 @@ __renderjsModules.f9cb76fc = (() => {
     "option": {},
     //下面是自定义format配置，因除H5端外的其他端无法通过props传递函数，只能通过此属性对应下标的方式来替换
     "formatter": {
+      "yAxisFix1": function(val, index, opts) {
+        return val.toFixed(1);
+      },
+      "yAxisFix2": function(val, index, opts) {
+        return val.toFixed(2);
+      },
+      "yAxisFix3": function(val, index, opts) {
+        return val.toFixed(3);
+      },
+      "yAxisFix4": function(val, index, opts) {
+        return val.toFixed(4);
+      },
+      "yAxisFix5": function(val, index, opts) {
+        return val.toFixed(5);
+      },
       "yAxisDemo1": function(val, index, opts) {
         return val + "\u5143";
       },

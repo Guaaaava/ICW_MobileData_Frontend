@@ -12,7 +12,7 @@
 		<view v-if="settingsVisible" class="settings-sidebar">
 		  <view class="settings-header">
 		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>
-				<!-- 实际上被导航栏挡住了 -->
+				<!-- ↑ 实际上被导航栏挡住了 -->
 		  </view>
 		  <view class="settings-content">
 		    <view class="settings-item">
@@ -60,12 +60,17 @@
 					v-if="!isLastDegree && (selectedDegree === '日' || selectedDegree === '月' || selectedDegree === '年')"
 					class="last-degree-button"
 					@click=toLastDegree
-				>←查看上一{{ selectedDegree }}</u-button>
+				>◀ 查看上一{{ selectedDegree }}</u-button>
+				<u-button
+					v-if="isLastDegree"
+					class="last-degree-button"
+					@click=toLastDegree
+				>◀ 查看上一{{ selectedDegree }}</u-button>
 				<u-button
 					v-if="isLastDegree"
 					class="last-degree-button"
 					@click=toDataNow(selectedDegree)
-				>回到当前{{ selectedDegree }}→</u-button>
+				>回到当前{{ selectedDegree }} ▶</u-button>
 			</view>
 		</view>
 		
@@ -254,7 +259,7 @@ const getAllDevices = async () => {
 	GetAllDevices()
 		.then((res) => {
 			// console.log('GetAllDevices response: ', res);
-			allDevices.value = res.data.data as Device[];
+			allDevices.value = res.data as Device[];
 		})
 		.catch((error) => {
 			console.error('Error getting all devices: ', error);
@@ -317,6 +322,7 @@ let degreeSelectList = ref<DegreeSelect[]>([
 let degreeSelectValue = ref<string>('秒'); // 默认选择秒
 let isTimeLoading = ref<boolean>(false); // 时程曲线加载中...
 let isAmpLoading = ref<boolean>(false); // 频谱曲线加载中...
+let lastCount = ref<number>(0); // 上 lastCount 分度
 
 const secondItv = 8;
 const minuteItv = 480;
@@ -329,6 +335,7 @@ const yearItv = 28800000; // 1095 data
 // 选中单选框时触发
 const degreeRadioChange = (e: string) => {
 	isLastDegree.value = false;
+	lastCount.value = 0;
 	selectedDegree.value = e;
 	if (e === '秒') {
 		selectedTableName.value = 'time_series';
@@ -370,17 +377,19 @@ let lastTimeDataPV = ref<number[]>([0, 0, 0]); // 历史时程曲线 X、Y、Z �
 // 上一日、上一月、去年
 const toLastDegree = () => {
 	isLastDegree.value = true;
+	lastCount.value += 1;
 	
 	// 加载中...
 	isTimeLoading.value = true;
 	setTimeout(() => {
 		isTimeLoading.value = false;
-	}, 1000); // 加载 1s
+	}, 1500); // 加载 1.5s
 }
 
 // 回到当前
 const toDataNow = () => {
 	isLastDegree.value = false;
+	lastCount.value = 0;
 	
 	// 加载中...
 	isTimeLoading.value = true;
@@ -392,6 +401,27 @@ const toDataNow = () => {
 // 获取上一个分度的时程曲线数据
 const getLastTimeData = async () => {
 	let timeStamp = transLastStamp(107, selectedTableName.value);
+	
+	// 处理无数据的情况
+	if (timeStamp === 0) {
+		let dataNum = 0;
+		let gap = 0;
+		let timeSeriesData: any[];
+		let response: any;
+		if (selectedTableName.value === 'time_series_months') dataNum = 1080, gap=2592000000;
+		else if (selectedTableName.value === 'time_series_years') dataNum = 1095, gap=31536000000;
+		
+		timeSeriesData = new Array(dataNum).fill(null);
+		response = {
+			categories: caculateTimeList(1735574400000-lastCount.value*gap, selectedInterval.value),
+			series: [ { name: axisOrder[curAxisIndex.value], data: timeSeriesData } ]
+		};
+		lastXData.value = JSON.parse(JSON.stringify(response));
+		lastYData.value = JSON.parse(JSON.stringify(processTimeData(response)));
+		lastZData.value = JSON.parse(JSON.stringify(processTimeData(response)));
+		lastTimeDataRMS.value[0] = 0; lastTimeDataRMS.value[1] = 0; lastTimeDataRMS.value[2] = 0;
+		lastTimeDataPV.value[0] = 0; lastTimeDataPV.value[1] = 0; lastTimeDataPV.value[2] = 0;
+	}
 	
 	// X 轴数据
 	GetTimeXData(timeStamp, selectedDeviceId.value, selectedTableName.value)
@@ -528,12 +558,18 @@ const transLastStamp = (ms: number, degree: string) => {
 		const currentYear = timeNow.getFullYear();
 		const currentMonth = timeNow.getMonth();
 		const currentDay = timeNow.getDate();
-		const timeNew = new Date(currentYear, currentMonth, currentDay, 0, 0, 0, ms);
+		const timeNew = new Date(currentYear, currentMonth, currentDay-lastCount.value+1, 0, 0, 0, ms);
 		return timeNew.getTime();
 	} else if (degree === 'time_series_months') {
-		return 1735574400000;
+		if (lastCount.value === 0 || lastCount.value === 1)
+			return 1735574400000;
+		else
+			return 0;
 	} else if (degree === 'time_series_years') {
-		return 1735574400000;
+		if (lastCount.value === 0 || lastCount.value === 1)
+			return 1735574400000;
+		else
+			return 0;
 	}
 	return Date.now();
 }
@@ -784,7 +820,7 @@ let amplitudeChartOpts = ref({
 	duration: 0,
 	dataPointShape: false,
 	padding: [20, 30, 0, 5],
-	xAxis: { boundaryGap: 'justify', labelCount: 6 },
+	xAxis: { boundaryGap: 'justify', labelCount: 12 },
 	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.5 }] },
 	extra: { markLine: { data: [
 		{ value: ampDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -10 }, // 阈值标记线
@@ -900,7 +936,7 @@ const getAmplitudeData = async () => {
 // 方法：处理频谱数据以适配图表，返回处理后数据
 const processAmpData = (originalData: any) => {
 	let intervals: number[] = originalData.frequencyInterval;
-	let roundedIntervals = intervals.map(num => parseFloat(num.toFixed(3)));
+	let roundedIntervals = intervals.map(num => Math.floor(num));
 	
 	let resData = {
 		categories: roundedIntervals,

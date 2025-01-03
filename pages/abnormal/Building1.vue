@@ -200,13 +200,23 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const [timeResponse, spectrumResponse] = await Promise.all([
-          fetch("http://110.42.214.164:8003/TimeAnomaly"),
-          fetch("http://110.42.214.164:8003/SpectrumAnomaly"),
-        ]);
-
-        const timeResult = await timeResponse.json();
-        const spectrumResult = await spectrumResponse.json();
+				const timeUrl = "http://110.42.214.164:8003/TimeAnomaly";
+				const spectrumUrl = "http://110.42.214.164:8003/SpectrumAnomaly";
+				
+				const timeResponse = await uni.request({
+					url: timeUrl,
+					method: 'GET',
+					data: {},
+				});
+				
+				const spectrumResponse = await uni.request({
+					url: spectrumUrl,
+					method: 'GET',
+					data: {},
+				});
+				
+        const timeResult = timeResponse.data;
+        const spectrumResult = spectrumResponse.data;
 
         if (timeResult.code === 200) {
           this.timeCurveData = timeResult.data;

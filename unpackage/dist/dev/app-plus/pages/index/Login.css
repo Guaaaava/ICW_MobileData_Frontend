@@ -1,0 +1,81 @@
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+}
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 使用100vh确保图片覆盖整个视口高度 */
+  object-fit: cover; /* 确保图片覆盖整个容器，同时保持宽高比 */
+  background-repeat: no-repeat; /* 防止图片重复 */
+  background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+  background-position: center; /* 背景图片居中显示 */
+  z-index: -1; /* 确保背景图片在内容之下 */
+}
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+.input-field {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.input-field:focus {
+  border-color: #007BFF;
+}
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.device-button {
+  width: 48%; /* 根据需要调整宽度 */
+  height: 60px; /* 与设备按钮高度一致 */
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e0f7fa; /* 与设备按钮背景一致 */
+  color: #333;
+  font-size: 20px; /* 与设备按钮字体大小一致 */
+  line-height: 60px; /* 与设备按钮高度一致，垂直居中文本 */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.device-button:hover {
+  background-color: #4caf50; /* 与设备按钮悬浮效果一致 */
+  color: white;
+}
+.device-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

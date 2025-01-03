@@ -36,21 +36,26 @@ export default {
     };
   },
   methods: {
-    fetchSensors() {
+    async fetchSensors() {
       const building = '综合楼';
       const encodedBuilding = encodeURIComponent(building);
       const url = `http://110.42.214.164:8003/sensor/${encodedBuilding}`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          if (data.code === 200 && data.data) {
-            this.sensors = data.data;
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching sensors:', error);
-        });
+			
+			try {
+				const response = await uni.request({
+					url: url,
+					method: 'GET',
+					data: {}
+				});
+				
+				if (response.data.code === 200 && response.data.data) {
+					this.sensors = response.data.data;
+				} else {
+					console.error('Error fetching sensors:', error);
+				}
+			} catch (error) {
+				console.error('Error fetching sensors:', error);
+			}
     },
     handleSensorClick(sensor) {
       if (sensor.status === '0') {
