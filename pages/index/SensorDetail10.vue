@@ -10,10 +10,6 @@
 		
 		<!-- 设置侧边栏 -->
 		<view v-if="settingsVisible" class="settings-sidebar">
-		  <view class="settings-header">
-		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>
-				<!-- ↑ 实际上被导航栏挡住了 -->
-		  </view>
 		  <view class="settings-content">
 		    <view class="settings-item">
 		      <u-switch v-model="isValid" @change="handleSwitchChange('isValid', $event)"></u-switch>
@@ -811,7 +807,7 @@ let amplitudeZData = ref([]);
 let amplitudeChartData = ref([]);
 let amplitudeDataRMS = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的有效值
 let amplitudeDataPV = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的峰值
-let ampDataThreshold = ref<number>(0.4); // 频谱数据异常值（幅值），默认为 0.4
+let ampDataThreshold = ref<number>(0.06); // 频谱数据异常值（幅值），默认为 0.1
 
 // 频谱曲线图表设置
 let amplitudeChartOpts = ref({
@@ -821,7 +817,7 @@ let amplitudeChartOpts = ref({
 	dataPointShape: false,
 	padding: [20, 30, 0, 5],
 	xAxis: { boundaryGap: 'justify', labelCount: 12 },
-	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.5 }] },
+	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.1 }] },
 	extra: { markLine: { data: [
 		{ value: ampDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -10 }, // 阈值标记线
 	] } }
@@ -1237,6 +1233,7 @@ onUnload(() => {
 }
 
 .settings-sidebar {
+	overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -1247,12 +1244,6 @@ onUnload(() => {
   z-index: 10;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.settings-header {
-  margin-bottom: 20px;
-	display: flex;
-	justify-content: flex-end;
 }
 
 .settings-item {

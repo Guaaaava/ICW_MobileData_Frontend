@@ -2171,6 +2171,7 @@ to {
 	font-size: 14px;
 }
 .settings-sidebar[data-v-7b4f4645] {
+	overflow-y: auto;
   position: fixed;
   top: 0;
   right: 0;
@@ -2181,11 +2182,6 @@ to {
   z-index: 10;
   padding: 20px;
   box-sizing: border-box;
-}
-.settings-header[data-v-7b4f4645] {
-  margin-bottom: 20px;
-	display: flex;
-	justify-content: flex-end;
 }
 .settings-item[data-v-7b4f4645] {
 	display: flex;

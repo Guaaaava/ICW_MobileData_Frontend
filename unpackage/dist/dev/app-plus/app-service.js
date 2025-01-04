@@ -687,7 +687,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-5de67484"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-icon/u-icon.vue"]]);
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-5de67484"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-icon/u-icon.vue"]]);
   const _sfc_main$q = {
     name: "u-toast",
     props: {
@@ -797,7 +797,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
+    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1265,7 +1265,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_u_mask = resolveEasycom(vue.resolveDynamicComponent("u-mask"), __easycom_0$3);
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
+    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_0$6);
     return $data.visibleSync ? (vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -1800,7 +1800,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-033901d2"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-switch/u-switch.vue"]]);
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-033901d2"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-switch/u-switch.vue"]]);
   function broadcast(componentName, eventName, params) {
   }
   const Emitter = {
@@ -2111,7 +2111,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
+    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2224,7 +2224,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-dc846cb1"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-input/u-input.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-dc846cb1"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-input/u-input.vue"]]);
   const _sfc_main$j = {
     name: "u-radio",
     emits: ["change"],
@@ -2388,7 +2388,7 @@ if (uni.restoreGlobal) {
     }
   };
   function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
+    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_0$6);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -2432,7 +2432,7 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-3d838a1d"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-radio/u-radio.vue"]]);
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-3d838a1d"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-radio/u-radio.vue"]]);
   const _sfc_main$i = {
     name: "u-radio-group",
     emits: ["update:modelValue", "input", "change"],
@@ -2567,7 +2567,7 @@ if (uni.restoreGlobal) {
       /* CLASS */
     );
   }
-  const __easycom_6 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-1d03092d"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-radio-group/u-radio-group.vue"]]);
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-1d03092d"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-radio-group/u-radio-group.vue"]]);
   const _sfc_main$h = {
     name: "u-button",
     emits: ["click", "getphonenumber", "getuserinfo", "error", "opensetting", "launchapp", "chooseavatar"],
@@ -2873,7 +2873,7 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ], 46, ["hover-start-time", "hover-stay-time", "disabled", "form-type", "open-type", "app-parameter", "hover-stop-propagation", "send-message-title", "lang", "data-name", "session-from", "send-message-img", "show-message-card", "hover-class", "loading"]);
   }
-  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-097def2b"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-button/u-button.vue"]]);
+  const __easycom_6 = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-097def2b"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/vk-uview-ui/components/u-button/u-button.vue"]]);
   const pages = [
     {
       path: "pages/index/Login",
@@ -7765,7 +7765,7 @@ ${o3}
   }
   if (typeof block0 === "function")
     block0(_sfc_main$9);
-  const __easycom_8 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-0ca34aee"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
+  const __easycom_7 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-0ca34aee"], ["__file", "E:/VS Code Files/Project/CurtainWallMobile-Frontend/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue"]]);
   const base_url = "http://110.42.214.164:8003";
   const timeout$1 = 5e3;
   const request = (params) => {
@@ -7957,7 +7957,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:265", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:261", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -7998,7 +7998,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv$2;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:359", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:355", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -8060,7 +8060,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:435", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -8068,7 +8068,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:447", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -8076,7 +8076,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:459", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -8114,7 +8114,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:501", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:497", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -8157,7 +8157,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail8.vue:550", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail8.vue:546", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -8252,7 +8252,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:666", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:662", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -8261,7 +8261,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:697", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:693", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -8270,7 +8270,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:727", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:723", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -8324,7 +8324,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.4);
+      let ampDataThreshold = vue.ref(0.06);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -8332,7 +8332,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.5 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线
@@ -8347,7 +8347,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:846", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:842", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -8356,7 +8356,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:876", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:872", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -8365,7 +8365,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:906", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:902", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -8473,10 +8473,10 @@ ${o3}
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1076", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1077", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1072", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1073", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:1080", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:1076", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -8510,10 +8510,10 @@ ${o3}
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1134", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1135", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1130", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1131", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:1138", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:1134", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -8727,13 +8727,12 @@ ${o3}
   function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_u_toast = resolveEasycom(vue.resolveDynamicComponent("u-toast"), __easycom_0$5);
     const _component_u_modal = resolveEasycom(vue.resolveDynamicComponent("u-modal"), __easycom_1$1);
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
-    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_3);
-    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_4);
-    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_5);
-    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_6);
-    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_7);
-    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_8);
+    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_2);
+    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_3);
+    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_4);
+    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_5);
+    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_6);
+    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createCommentVNode(" 弹窗提示 "),
       vue.createVNode(
@@ -8760,14 +8759,6 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
-        vue.createElementVNode("view", { class: "settings-header" }, [
-          vue.createVNode(_component_u_icon, {
-            name: "arrow-right",
-            size: "30",
-            onClick: $setup.toggleSettings
-          }),
-          vue.createCommentVNode(" ↑ 实际上被导航栏挡住了 ")
-        ]),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -9035,7 +9026,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:265", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:261", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -9076,7 +9067,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv$1;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:359", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:355", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -9138,7 +9129,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:435", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -9146,7 +9137,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:447", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -9154,7 +9145,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:459", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -9192,7 +9183,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:501", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:497", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -9235,7 +9226,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail9.vue:550", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail9.vue:546", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -9330,7 +9321,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:666", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:662", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -9339,7 +9330,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:697", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:693", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -9348,7 +9339,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:727", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:723", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -9402,7 +9393,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.4);
+      let ampDataThreshold = vue.ref(0.06);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -9410,7 +9401,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.5 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线
@@ -9425,7 +9416,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:846", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:842", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -9434,7 +9425,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:876", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:872", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -9443,7 +9434,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:906", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:902", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -9551,10 +9542,10 @@ ${o3}
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1076", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1077", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1072", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1073", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:1080", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:1076", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -9588,10 +9579,10 @@ ${o3}
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1134", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1135", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1130", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1131", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:1138", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:1134", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -9805,13 +9796,12 @@ ${o3}
   function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_u_toast = resolveEasycom(vue.resolveDynamicComponent("u-toast"), __easycom_0$5);
     const _component_u_modal = resolveEasycom(vue.resolveDynamicComponent("u-modal"), __easycom_1$1);
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
-    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_3);
-    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_4);
-    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_5);
-    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_6);
-    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_7);
-    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_8);
+    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_2);
+    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_3);
+    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_4);
+    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_5);
+    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_6);
+    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createCommentVNode(" 弹窗提示 "),
       vue.createVNode(
@@ -9838,14 +9828,6 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
-        vue.createElementVNode("view", { class: "settings-header" }, [
-          vue.createVNode(_component_u_icon, {
-            name: "arrow-right",
-            size: "30",
-            onClick: $setup.toggleSettings
-          }),
-          vue.createCommentVNode(" ↑ 实际上被导航栏挡住了 ")
-        ]),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -10113,7 +10095,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:265", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:261", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -10154,7 +10136,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:359", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:355", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -10216,7 +10198,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:435", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -10224,7 +10206,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:447", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -10232,7 +10214,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:459", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -10270,7 +10252,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:501", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:497", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -10313,7 +10295,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail10.vue:550", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail10.vue:546", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -10408,7 +10390,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:666", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:662", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -10417,7 +10399,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:697", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:693", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -10426,7 +10408,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:727", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:723", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -10480,7 +10462,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.4);
+      let ampDataThreshold = vue.ref(0.06);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -10488,7 +10470,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.5 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线
@@ -10503,7 +10485,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:846", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:842", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -10512,7 +10494,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:876", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:872", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -10521,7 +10503,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:906", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:902", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -10629,10 +10611,10 @@ ${o3}
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1076", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1077", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1072", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1073", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:1080", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:1076", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -10666,10 +10648,10 @@ ${o3}
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1134", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1135", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1130", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1131", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:1138", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:1134", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -10883,13 +10865,12 @@ ${o3}
   function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_u_toast = resolveEasycom(vue.resolveDynamicComponent("u-toast"), __easycom_0$5);
     const _component_u_modal = resolveEasycom(vue.resolveDynamicComponent("u-modal"), __easycom_1$1);
-    const _component_u_icon = resolveEasycom(vue.resolveDynamicComponent("u-icon"), __easycom_2);
-    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_3);
-    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_4);
-    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_5);
-    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_6);
-    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_7);
-    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_8);
+    const _component_u_switch = resolveEasycom(vue.resolveDynamicComponent("u-switch"), __easycom_2);
+    const _component_u_input = resolveEasycom(vue.resolveDynamicComponent("u-input"), __easycom_3);
+    const _component_u_radio = resolveEasycom(vue.resolveDynamicComponent("u-radio"), __easycom_4);
+    const _component_u_radio_group = resolveEasycom(vue.resolveDynamicComponent("u-radio-group"), __easycom_5);
+    const _component_u_button = resolveEasycom(vue.resolveDynamicComponent("u-button"), __easycom_6);
+    const _component_qiun_data_charts = resolveEasycom(vue.resolveDynamicComponent("qiun-data-charts"), __easycom_7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createCommentVNode(" 弹窗提示 "),
       vue.createVNode(
@@ -10916,14 +10897,6 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
-        vue.createElementVNode("view", { class: "settings-header" }, [
-          vue.createVNode(_component_u_icon, {
-            name: "arrow-right",
-            size: "30",
-            onClick: $setup.toggleSettings
-          }),
-          vue.createCommentVNode(" ↑ 实际上被导航栏挡住了 ")
-        ]),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -11654,10 +11627,11 @@ ${o3}
         directionList: [{ label: "全部", value: null }, { label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
         deviceSelectList: [
           { label: "全部", value: null },
-          { label: "871EDFC", value: "871EDFC" },
           { label: "4787BE3A", value: "4787BE3A" },
-          { label: "874DEXXX", value: "874DEXXX" },
-          { label: "29FA1867", value: "29FA1867" }
+          { label: "8850A7D7", value: "8850A7D7" },
+          { label: "8361D7CD", value: "8361D7CD" },
+          { label: "612B04ED", value: "612B04ED" },
+          { label: "E884C99D", value: "E884C99D" }
         ],
         urgencyList: [
           { label: "全部", value: null },
@@ -11703,7 +11677,7 @@ ${o3}
             this.frequencySpectrumData = spectrumResult.data;
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/abnormal/Building1.vue:228", "获取数据失败：", error2);
+          formatAppLog("error", "at pages/abnormal/Building1.vue:233", "获取数据失败：", error2);
         }
       },
       applyFilter(data) {
@@ -11992,90 +11966,92 @@ ${o3}
         key: 0,
         class: "table-wrapper"
       }, [
-        vue.createElementVNode("table", null, [
-          vue.createElementVNode("thead", null, [
-            vue.createElementVNode("tr", null, [
-              vue.createElementVNode("th", null, "时间"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("direction")),
-                  class: vue.normalizeClass({ "active": $data.filters.direction })
-                },
-                " 方向▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("device")),
-                  class: vue.normalizeClass({ "active": $data.filters.device })
-                },
-                " 设备▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[10] || (_cache[10] = ($event) => $options.toggleFilter("urgency")),
-                  class: vue.normalizeClass({ "active": $data.filters.urgency })
-                },
-                " 紧急程度▼ ",
-                2
-                /* CLASS */
-              )
-            ])
-          ]),
-          vue.createElementVNode("tbody", null, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList($options.filteredTimeCurveData, (item, index) => {
-                return vue.openBlock(), vue.createElementBlock(
-                  "tr",
+        vue.createElementVNode("div", { class: "table-container" }, [
+          vue.createElementVNode("table", null, [
+            vue.createElementVNode("thead", null, [
+              vue.createElementVNode("tr", null, [
+                vue.createElementVNode("th", null, "时间"),
+                vue.createElementVNode(
+                  "th",
                   {
-                    key: index,
-                    class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("direction")),
+                    class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
-                  [
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatTime(item.time)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.direction),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.device),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatUrgency(item.urgency)),
-                      1
-                      /* TEXT */
-                    )
-                  ],
+                  " 方向▼ ",
                   2
                   /* CLASS */
-                );
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("device")),
+                    class: vue.normalizeClass({ "active": $data.filters.device })
+                  },
+                  " 设备▼ ",
+                  2
+                  /* CLASS */
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[10] || (_cache[10] = ($event) => $options.toggleFilter("urgency")),
+                    class: vue.normalizeClass({ "active": $data.filters.urgency })
+                  },
+                  " 紧急程度▼ ",
+                  2
+                  /* CLASS */
+                )
+              ])
+            ]),
+            vue.createElementVNode("tbody", null, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($options.filteredTimeCurveData, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "tr",
+                    {
+                      key: index,
+                      class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    },
+                    [
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatTime(item.time)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.direction),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.device),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatUrgency(item.urgency)),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
           ])
         ])
       ])) : vue.createCommentVNode("v-if", true),
@@ -12083,112 +12059,114 @@ ${o3}
         key: 1,
         class: "table-wrapper"
       }, [
-        vue.createElementVNode("table", null, [
-          vue.createElementVNode("thead", null, [
-            vue.createElementVNode("tr", null, [
-              vue.createElementVNode("th", {
-                onClick: _cache[11] || (_cache[11] = ($event) => $options.toggleFilter("time"))
-              }, "时间"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[12] || (_cache[12] = ($event) => $options.toggleFilter("direction")),
-                  class: vue.normalizeClass({ "active": $data.filters.direction })
-                },
-                " 方向▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[13] || (_cache[13] = ($event) => $options.toggleFilter("device")),
-                  class: vue.normalizeClass({ "active": $data.filters.device })
-                },
-                " 设备▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode("th", {
-                onClick: _cache[14] || (_cache[14] = ($event) => $options.toggleFilter("frequency"))
-              }, "频率区间"),
-              vue.createElementVNode("th", {
-                onClick: _cache[15] || (_cache[15] = ($event) => $options.toggleFilter("data"))
-              }, "数据"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[16] || (_cache[16] = ($event) => $options.toggleFilter("urgency")),
-                  class: vue.normalizeClass({ "active": $data.filters.urgency })
-                },
-                " 紧急程度▼ ",
-                2
-                /* CLASS */
-              )
-            ])
-          ]),
-          vue.createElementVNode("tbody", null, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList($options.filteredFrequencySpectrumData, (item, index) => {
-                return vue.openBlock(), vue.createElementBlock(
-                  "tr",
+        vue.createElementVNode("div", { class: "table-container" }, [
+          vue.createElementVNode("table", null, [
+            vue.createElementVNode("thead", null, [
+              vue.createElementVNode("tr", null, [
+                vue.createElementVNode("th", {
+                  onClick: _cache[11] || (_cache[11] = ($event) => $options.toggleFilter("time"))
+                }, "时间"),
+                vue.createElementVNode(
+                  "th",
                   {
-                    key: index,
-                    class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    onClick: _cache[12] || (_cache[12] = ($event) => $options.toggleFilter("direction")),
+                    class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
-                  [
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatTime(item.time)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.direction),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.device),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.frequencyInterval),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.data),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatUrgency(item.urgency)),
-                      1
-                      /* TEXT */
-                    )
-                  ],
+                  " 方向▼ ",
                   2
                   /* CLASS */
-                );
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[13] || (_cache[13] = ($event) => $options.toggleFilter("device")),
+                    class: vue.normalizeClass({ "active": $data.filters.device })
+                  },
+                  " 设备▼ ",
+                  2
+                  /* CLASS */
+                ),
+                vue.createElementVNode("th", {
+                  onClick: _cache[14] || (_cache[14] = ($event) => $options.toggleFilter("frequency"))
+                }, "频率区间"),
+                vue.createElementVNode("th", {
+                  onClick: _cache[15] || (_cache[15] = ($event) => $options.toggleFilter("data"))
+                }, "数据"),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[16] || (_cache[16] = ($event) => $options.toggleFilter("urgency")),
+                    class: vue.normalizeClass({ "active": $data.filters.urgency })
+                  },
+                  " 紧急程度▼ ",
+                  2
+                  /* CLASS */
+                )
+              ])
+            ]),
+            vue.createElementVNode("tbody", null, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($options.filteredFrequencySpectrumData, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "tr",
+                    {
+                      key: index,
+                      class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    },
+                    [
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatTime(item.time)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.direction),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.device),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.frequencyInterval),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.data),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatUrgency(item.urgency)),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
           ])
         ])
       ])) : vue.createCommentVNode("v-if", true),
@@ -12254,10 +12232,12 @@ ${o3}
         directionList: [{ label: "全部", value: null }, { label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
         deviceSelectList: [
           { label: "全部", value: null },
-          { label: "871EDFC", value: "871EDFC" },
-          { label: "4787BE3A", value: "4787BE3A" },
-          { label: "874DEXXX", value: "874DEXXX" },
-          { label: "29FA1867", value: "29FA1867" }
+          { label: "E43AC643", value: "E43AC643" },
+          { label: "29FA1867", value: "29FA1867" },
+          { label: "87C3D4E4", value: "87C3D4E4" },
+          { label: "9A0D1958", value: "9A0D1958" },
+          { label: "F853ED49", value: "F853ED49" },
+          { label: "A77C5238", value: "A77C5238" }
         ],
         urgencyList: [
           { label: "全部", value: null },
@@ -12303,7 +12283,7 @@ ${o3}
             this.frequencySpectrumData = spectrumResult.data;
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/abnormal/Building2.vue:194", "获取数据失败：", error2);
+          formatAppLog("error", "at pages/abnormal/Building2.vue:200", "获取数据失败：", error2);
         }
       },
       applyFilter(data) {
@@ -12385,90 +12365,92 @@ ${o3}
         key: 0,
         class: "table-wrapper"
       }, [
-        vue.createElementVNode("table", null, [
-          vue.createElementVNode("thead", null, [
-            vue.createElementVNode("tr", null, [
-              vue.createElementVNode("th", null, "时间"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[2] || (_cache[2] = ($event) => $options.toggleFilter("direction")),
-                  class: vue.normalizeClass({ "active": $data.filters.direction })
-                },
-                " 方向▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[3] || (_cache[3] = ($event) => $options.toggleFilter("device")),
-                  class: vue.normalizeClass({ "active": $data.filters.device })
-                },
-                " 设备▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[4] || (_cache[4] = ($event) => $options.toggleFilter("urgency")),
-                  class: vue.normalizeClass({ "active": $data.filters.urgency })
-                },
-                " 紧急程度▼ ",
-                2
-                /* CLASS */
-              )
-            ])
-          ]),
-          vue.createElementVNode("tbody", null, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList($options.filteredTimeCurveData, (item, index) => {
-                return vue.openBlock(), vue.createElementBlock(
-                  "tr",
+        vue.createElementVNode("div", { class: "table-container" }, [
+          vue.createElementVNode("table", null, [
+            vue.createElementVNode("thead", null, [
+              vue.createElementVNode("tr", null, [
+                vue.createElementVNode("th", null, "时间"),
+                vue.createElementVNode(
+                  "th",
                   {
-                    key: index,
-                    class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    onClick: _cache[2] || (_cache[2] = ($event) => $options.toggleFilter("direction")),
+                    class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
-                  [
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatTime(item.time)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.direction),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.device),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatUrgency(item.urgency)),
-                      1
-                      /* TEXT */
-                    )
-                  ],
+                  " 方向▼ ",
                   2
                   /* CLASS */
-                );
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[3] || (_cache[3] = ($event) => $options.toggleFilter("device")),
+                    class: vue.normalizeClass({ "active": $data.filters.device })
+                  },
+                  " 设备▼ ",
+                  2
+                  /* CLASS */
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[4] || (_cache[4] = ($event) => $options.toggleFilter("urgency")),
+                    class: vue.normalizeClass({ "active": $data.filters.urgency })
+                  },
+                  " 紧急程度▼ ",
+                  2
+                  /* CLASS */
+                )
+              ])
+            ]),
+            vue.createElementVNode("tbody", null, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($options.filteredTimeCurveData, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "tr",
+                    {
+                      key: index,
+                      class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    },
+                    [
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatTime(item.time)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.direction),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.device),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatUrgency(item.urgency)),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
           ])
         ])
       ])) : vue.createCommentVNode("v-if", true),
@@ -12476,110 +12458,112 @@ ${o3}
         key: 1,
         class: "table-wrapper"
       }, [
-        vue.createElementVNode("table", null, [
-          vue.createElementVNode("thead", null, [
-            vue.createElementVNode("tr", null, [
-              vue.createElementVNode("th", null, "时间"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[5] || (_cache[5] = ($event) => $options.toggleFilter("direction")),
-                  class: vue.normalizeClass({ "active": $data.filters.direction })
-                },
-                " 方向▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[6] || (_cache[6] = ($event) => $options.toggleFilter("device")),
-                  class: vue.normalizeClass({ "active": $data.filters.device })
-                },
-                " 设备▼ ",
-                2
-                /* CLASS */
-              ),
-              vue.createElementVNode("th", {
-                onClick: _cache[7] || (_cache[7] = ($event) => $options.toggleFilter("frequency"))
-              }, "频率区间"),
-              vue.createElementVNode("th", {
-                onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("data"))
-              }, "数据"),
-              vue.createElementVNode(
-                "th",
-                {
-                  onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("urgency")),
-                  class: vue.normalizeClass({ "active": $data.filters.urgency })
-                },
-                " 紧急程度▼ ",
-                2
-                /* CLASS */
-              )
-            ])
-          ]),
-          vue.createElementVNode("tbody", null, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList($options.filteredFrequencySpectrumData, (item, index) => {
-                return vue.openBlock(), vue.createElementBlock(
-                  "tr",
+        vue.createElementVNode("div", { class: "table-container" }, [
+          vue.createElementVNode("table", null, [
+            vue.createElementVNode("thead", null, [
+              vue.createElementVNode("tr", null, [
+                vue.createElementVNode("th", null, "时间"),
+                vue.createElementVNode(
+                  "th",
                   {
-                    key: index,
-                    class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    onClick: _cache[5] || (_cache[5] = ($event) => $options.toggleFilter("direction")),
+                    class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
-                  [
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatTime(item.time)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.direction),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.device),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.frequencyInterval),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString(item.data),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "td",
-                      null,
-                      vue.toDisplayString($options.formatUrgency(item.urgency)),
-                      1
-                      /* TEXT */
-                    )
-                  ],
+                  " 方向▼ ",
                   2
                   /* CLASS */
-                );
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            ))
+                ),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[6] || (_cache[6] = ($event) => $options.toggleFilter("device")),
+                    class: vue.normalizeClass({ "active": $data.filters.device })
+                  },
+                  " 设备▼ ",
+                  2
+                  /* CLASS */
+                ),
+                vue.createElementVNode("th", {
+                  onClick: _cache[7] || (_cache[7] = ($event) => $options.toggleFilter("frequency"))
+                }, "频率区间"),
+                vue.createElementVNode("th", {
+                  onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("data"))
+                }, "数据"),
+                vue.createElementVNode(
+                  "th",
+                  {
+                    onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("urgency")),
+                    class: vue.normalizeClass({ "active": $data.filters.urgency })
+                  },
+                  " 紧急程度▼ ",
+                  2
+                  /* CLASS */
+                )
+              ])
+            ]),
+            vue.createElementVNode("tbody", null, [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($options.filteredFrequencySpectrumData, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "tr",
+                    {
+                      key: index,
+                      class: vue.normalizeClass({ "odd-row": index % 2 === 0 })
+                    },
+                    [
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatTime(item.time)),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.direction),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.device),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.frequencyInterval),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString(item.data),
+                        1
+                        /* TEXT */
+                      ),
+                      vue.createElementVNode(
+                        "td",
+                        null,
+                        vue.toDisplayString($options.formatUrgency(item.urgency)),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ])
           ])
         ])
       ])) : vue.createCommentVNode("v-if", true),

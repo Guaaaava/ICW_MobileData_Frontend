@@ -50,73 +50,77 @@
 
     <!-- 异常数据表 -->
     <div v-if="activeType === 'timeCurve'" class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>时间</th>
-            <th 
-              @click="toggleFilter('direction')" 
-              :class="{'active': filters.direction}">
-              方向▼
-            </th>
-            <th 
-              @click="toggleFilter('device')" 
-              :class="{'active': filters.device}">
-              设备▼
-            </th>
-            <th 
-              @click="toggleFilter('urgency')" 
-              :class="{'active': filters.urgency}">
-              紧急程度▼
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in filteredTimeCurveData" :key="index" :class="{'odd-row': index % 2 === 0}">
-            <td>{{ formatTime(item.time) }}</td>
-            <td>{{ item.direction }}</td>
-            <td>{{ item.device }}</td>
-            <td>{{ formatUrgency(item.urgency) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+				<table>
+				  <thead>
+				    <tr>
+				      <th>时间</th>
+				      <th 
+				        @click="toggleFilter('direction')" 
+				        :class="{'active': filters.direction}">
+				        方向▼
+				      </th>
+				      <th 
+				        @click="toggleFilter('device')" 
+				        :class="{'active': filters.device}">
+				        设备▼
+				      </th>
+				      <th 
+				        @click="toggleFilter('urgency')" 
+				        :class="{'active': filters.urgency}">
+				        紧急程度▼
+				      </th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr v-for="(item, index) in filteredTimeCurveData" :key="index" :class="{'odd-row': index % 2 === 0}">
+				      <td>{{ formatTime(item.time) }}</td>
+				      <td>{{ item.direction }}</td>
+				      <td>{{ item.device }}</td>
+				      <td>{{ formatUrgency(item.urgency) }}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
     </div>
 
     <div v-if="activeType === 'frequencySpectrum'" class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th @click="toggleFilter('time')">时间</th>
-            <th 
-              @click="toggleFilter('direction')" 
-              :class="{'active': filters.direction}">
-              方向▼
-            </th>
-            <th 
-              @click="toggleFilter('device')" 
-              :class="{'active': filters.device}">
-              设备▼
-            </th>
-            <th @click="toggleFilter('frequency')">频率区间</th>
-            <th @click="toggleFilter('data')">数据</th>
-            <th 
-              @click="toggleFilter('urgency')" 
-              :class="{'active': filters.urgency}">
-              紧急程度▼
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in filteredFrequencySpectrumData" :key="index" :class="{'odd-row': index % 2 === 0}">
-            <td>{{ formatTime(item.time) }}</td>
-            <td>{{ item.direction }}</td>
-            <td>{{ item.device }}</td>
-            <td>{{ item.frequencyInterval }}</td>
-            <td>{{ item.data }}</td>
-            <td>{{ formatUrgency(item.urgency) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+				<table>
+				  <thead>
+				    <tr>
+				      <th @click="toggleFilter('time')">时间</th>
+				      <th 
+				        @click="toggleFilter('direction')" 
+				        :class="{'active': filters.direction}">
+				        方向▼
+				      </th>
+				      <th 
+				        @click="toggleFilter('device')" 
+				        :class="{'active': filters.device}">
+				        设备▼
+				      </th>
+				      <th @click="toggleFilter('frequency')">频率区间</th>
+				      <th @click="toggleFilter('data')">数据</th>
+				      <th 
+				        @click="toggleFilter('urgency')" 
+				        :class="{'active': filters.urgency}">
+				        紧急程度▼
+				      </th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr v-for="(item, index) in filteredFrequencySpectrumData" :key="index" :class="{'odd-row': index % 2 === 0}">
+				      <td>{{ formatTime(item.time) }}</td>
+				      <td>{{ item.direction }}</td>
+				      <td>{{ item.device }}</td>
+				      <td>{{ item.frequencyInterval }}</td>
+				      <td>{{ item.data }}</td>
+				      <td>{{ formatUrgency(item.urgency) }}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
     </div>
 
     <!-- 方向选择框 -->
@@ -172,10 +176,11 @@ export default {
       directionList: [{ label: "全部", value: null },{ label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
       deviceSelectList: [
         { label: "全部", value: null },
-        { label: "871EDFC", value: "871EDFC" },
         { label: "4787BE3A", value: "4787BE3A" },
-        { label: "874DEXXX", value: "874DEXXX" },
-        { label: "29FA1867", value: "29FA1867" },
+        { label: "8850A7D7", value: "8850A7D7" },
+        { label: "8361D7CD", value: "8361D7CD" },
+        { label: "612B04ED", value: "612B04ED" },
+				{ label: "E884C99D", value: "E884C99D" },
       ],
       urgencyList: [
         { label: "全部", value: null },
@@ -325,7 +330,7 @@ export default {
   margin: 20px;
   background-color: #f4f7fc;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -339,7 +344,7 @@ h1 {
 .type-selector {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .type-selector button {
@@ -377,6 +382,13 @@ h1 {
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 10px;
+}
+
+.table-container {
+	overflow-x: auto;
+	white-space: nowrap;
+	border: 1px solid #ddd;
+	padding: 8px;
 }
 
 table {
