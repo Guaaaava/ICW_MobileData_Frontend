@@ -12,9 +12,9 @@ export default (params) => {
 		'Tenant-Id': uni.getStorageSync('tenantId') || 'xxx', // avue配置相关
 		...params.header
 	}
-	if (method == "post") {
+	if (method == 'POST') {
 		header = {
-			'Content-Type': 'multipart/form-data' // 自定义，与后端约定好格式
+			'Content-Type': 'application/json' // 自定义，与后端约定好格式
 		};
 	}
 	return new Promise((resolve, reject) => {
@@ -25,7 +25,7 @@ export default (params) => {
 			data: data,
       timeout,
 			success(response) {
-				const res = response
+				const res = response;
 				// 根据返回的状态码做出对应的操作
 				// 获取成功
 				// console.log(res.statusCode);

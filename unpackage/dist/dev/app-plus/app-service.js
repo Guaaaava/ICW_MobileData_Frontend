@@ -7780,9 +7780,9 @@ ${o3}
       // avue配置相关
       ...params.header
     };
-    if (method == "post") {
+    if (method == "POST") {
       header = {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/json"
         // 自定义，与后端约定好格式
       };
     }
@@ -7875,7 +7875,7 @@ ${o3}
   const PostTimeDataAnomaly = (anomaly) => {
     return request({
       url: "/TimeAnomaly",
-      method: "post",
+      method: "POST",
       data: anomaly,
       header: {}
     });
@@ -7883,7 +7883,7 @@ ${o3}
   const PostAmplitudeDataAnomaly = (anomaly) => {
     return request({
       url: "/SpectrumAnomaly",
-      method: "post",
+      method: "POST",
       data: anomaly,
       header: {}
     });
@@ -7894,6 +7894,7 @@ ${o3}
   const dayItv$2 = 86400;
   const monthItv$2 = 24e5;
   const yearItv$2 = 288e5;
+  const anomalyGap$2 = 3e5;
   const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     __name: "SensorDetail8",
     setup(__props, { expose: __expose }) {
@@ -7957,7 +7958,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:261", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:266", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -7998,7 +7999,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv$2;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:355", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:360", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -8060,7 +8061,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:436", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -8068,7 +8069,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:448", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -8076,7 +8077,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:460", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -8114,7 +8115,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:497", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:502", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -8157,7 +8158,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail8.vue:546", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail8.vue:551", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -8252,7 +8253,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:662", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:667", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -8261,7 +8262,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:693", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:698", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -8270,7 +8271,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:723", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:728", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -8347,7 +8348,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:842", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:847", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -8356,7 +8357,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:872", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:877", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -8365,7 +8366,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:902", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:907", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -8444,6 +8445,8 @@ ${o3}
             timeChartInfo.value += `-峰值:${lastTimeDataPV.value[curAxisIndex.value]}`, ampChartInfo.value += `-峰值:${amplitudeDataPV.value[curAxisIndex.value]}`;
         }
       };
+      let lastTimeAnomalyStamp = vue.ref(0);
+      let lastAmpAnomalyStamp = vue.ref(0);
       const calculateTimeRatio = (anomalyData) => {
         let r2 = anomalyData / timeDataThreshold.value - 1;
         if (r2 >= 0 && r2 <= 1)
@@ -8456,7 +8459,9 @@ ${o3}
           return 4;
       };
       const checkTimeData = (originalData) => {
-        originalData.data.forEach((t_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const t_data = originalData.data[index];
+          const stamp = Date.now();
           if (t_data > timeDataThreshold.value) {
             let urg = calculateTimeRatio(t_data);
             let exceptionTimeData = {
@@ -8467,16 +8472,28 @@ ${o3}
               urgency: urg,
               threshold: timeDataThreshold.value
             };
-            saveExceptionTimeData(exceptionTimeData);
+            if (urg >= 2 && stamp - lastTimeAnomalyStamp.value > anomalyGap$2) {
+              lastTimeAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "时程数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionTimeData(exceptionTimeData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1072", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1073", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1093", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1094", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:1076", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:1097", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -8491,7 +8508,9 @@ ${o3}
           return 4;
       };
       const checkAmpData = (originalData) => {
-        originalData.data.forEach((a_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const a_data = originalData.data[index];
+          const stamp = Date.now();
           if (a_data > ampDataThreshold.value) {
             let urg = calculateAmpRatio(a_data);
             let exceptionAmpData = {
@@ -8504,16 +8523,28 @@ ${o3}
               urgency: urg,
               threshold: ampDataThreshold.value
             };
-            saveExceptionAmpData(exceptionAmpData);
+            if (urg >= 2 && stamp - lastAmpAnomalyStamp.value > anomalyGap$2) {
+              lastAmpAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "频谱数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionAmpData(exceptionAmpData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1130", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail8.vue:1131", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1164", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail8.vue:1165", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail8.vue:1134", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail8.vue:1168", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -8695,7 +8726,15 @@ ${o3}
         return ampChartInfo;
       }, set ampChartInfo(v2) {
         ampChartInfo = v2;
-      }, axisRadioChange, changeAxis, getChartInfo, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
+      }, axisRadioChange, changeAxis, getChartInfo, get lastTimeAnomalyStamp() {
+        return lastTimeAnomalyStamp;
+      }, set lastTimeAnomalyStamp(v2) {
+        lastTimeAnomalyStamp = v2;
+      }, get lastAmpAnomalyStamp() {
+        return lastAmpAnomalyStamp;
+      }, set lastAmpAnomalyStamp(v2) {
+        lastAmpAnomalyStamp = v2;
+      }, anomalyGap: anomalyGap$2, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
         return timeDataIntervalId;
       }, set timeDataIntervalId(v2) {
         timeDataIntervalId = v2;
@@ -8759,6 +8798,7 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
+        vue.createCommentVNode('\r\n			<view class="settings-header">\n		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>\n			</view> \r\n		'),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -8963,6 +9003,7 @@ ${o3}
   const dayItv$1 = 86400;
   const monthItv$1 = 24e5;
   const yearItv$1 = 288e5;
+  const anomalyGap$1 = 3e5;
   const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
     __name: "SensorDetail9",
     setup(__props, { expose: __expose }) {
@@ -9026,7 +9067,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:261", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:266", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -9067,7 +9108,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv$1;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:355", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:360", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -9129,7 +9170,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:436", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -9137,7 +9178,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:448", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -9145,7 +9186,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:460", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -9183,7 +9224,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:497", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:502", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -9226,7 +9267,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail9.vue:546", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail9.vue:551", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -9321,7 +9362,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:662", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:667", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -9330,7 +9371,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:693", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:698", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -9339,7 +9380,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:723", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:728", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -9416,7 +9457,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:842", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:847", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -9425,7 +9466,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:872", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:877", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -9434,7 +9475,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:902", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:907", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -9513,6 +9554,8 @@ ${o3}
             timeChartInfo.value += `-峰值:${lastTimeDataPV.value[curAxisIndex.value]}`, ampChartInfo.value += `-峰值:${amplitudeDataPV.value[curAxisIndex.value]}`;
         }
       };
+      let lastTimeAnomalyStamp = vue.ref(0);
+      let lastAmpAnomalyStamp = vue.ref(0);
       const calculateTimeRatio = (anomalyData) => {
         let r2 = anomalyData / timeDataThreshold.value - 1;
         if (r2 >= 0 && r2 <= 1)
@@ -9525,7 +9568,9 @@ ${o3}
           return 4;
       };
       const checkTimeData = (originalData) => {
-        originalData.data.forEach((t_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const t_data = originalData.data[index];
+          const stamp = Date.now();
           if (t_data > timeDataThreshold.value) {
             let urg = calculateTimeRatio(t_data);
             let exceptionTimeData = {
@@ -9536,16 +9581,28 @@ ${o3}
               urgency: urg,
               threshold: timeDataThreshold.value
             };
-            saveExceptionTimeData(exceptionTimeData);
+            if (urg >= 2 && stamp - lastTimeAnomalyStamp.value > anomalyGap$1) {
+              lastTimeAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "时程数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionTimeData(exceptionTimeData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1072", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1073", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1093", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1094", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:1076", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:1097", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -9560,7 +9617,9 @@ ${o3}
           return 4;
       };
       const checkAmpData = (originalData) => {
-        originalData.data.forEach((a_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const a_data = originalData.data[index];
+          const stamp = Date.now();
           if (a_data > ampDataThreshold.value) {
             let urg = calculateAmpRatio(a_data);
             let exceptionAmpData = {
@@ -9573,16 +9632,28 @@ ${o3}
               urgency: urg,
               threshold: ampDataThreshold.value
             };
-            saveExceptionAmpData(exceptionAmpData);
+            if (urg >= 2 && stamp - lastAmpAnomalyStamp.value > anomalyGap$1) {
+              lastAmpAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "频谱数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionAmpData(exceptionAmpData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1130", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail9.vue:1131", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1164", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail9.vue:1165", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail9.vue:1134", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail9.vue:1168", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -9764,7 +9835,15 @@ ${o3}
         return ampChartInfo;
       }, set ampChartInfo(v2) {
         ampChartInfo = v2;
-      }, axisRadioChange, changeAxis, getChartInfo, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
+      }, axisRadioChange, changeAxis, getChartInfo, get lastTimeAnomalyStamp() {
+        return lastTimeAnomalyStamp;
+      }, set lastTimeAnomalyStamp(v2) {
+        lastTimeAnomalyStamp = v2;
+      }, get lastAmpAnomalyStamp() {
+        return lastAmpAnomalyStamp;
+      }, set lastAmpAnomalyStamp(v2) {
+        lastAmpAnomalyStamp = v2;
+      }, anomalyGap: anomalyGap$1, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
         return timeDataIntervalId;
       }, set timeDataIntervalId(v2) {
         timeDataIntervalId = v2;
@@ -9828,6 +9907,7 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
+        vue.createCommentVNode('\r\n			<view class="settings-header">\n		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>\n			</view> \r\n		'),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -10032,6 +10112,7 @@ ${o3}
   const dayItv = 86400;
   const monthItv = 24e5;
   const yearItv = 288e5;
+  const anomalyGap = 3e5;
   const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
     __name: "SensorDetail10",
     setup(__props, { expose: __expose }) {
@@ -10095,7 +10176,7 @@ ${o3}
         GetAllDevices().then((res) => {
           allDevices.value = res.data;
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:261", "Error getting all devices: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:266", "Error getting all devices: ", error2);
         });
       };
       let selectedDegree = vue.ref("秒");
@@ -10136,7 +10217,7 @@ ${o3}
           selectedTableName.value = "time_series_years";
           selectedInterval.value = yearItv;
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:355", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:360", "radioChange failed!");
         }
         isTimeLoading.value = true;
         setTimeout(() => {
@@ -10198,7 +10279,7 @@ ${o3}
           lastTimeDataRMS.value[0] = parseFloat(calculateTimeRMS(xresponse.data).toFixed(6));
           lastTimeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:431", "Error getting X last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:436", "Error getting X last Data: " + selectedTableName.value, error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -10206,7 +10287,7 @@ ${o3}
           lastTimeDataRMS.value[1] = parseFloat(calculateTimeRMS(yresponse.data).toFixed(6));
           lastTimeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:443", "Error getting Y last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:448", "Error getting Y last Data: " + selectedTableName.value, error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -10214,7 +10295,7 @@ ${o3}
           lastTimeDataRMS.value[2] = parseFloat(calculateTimeRMS(zresponse.data).toFixed(6));
           lastTimeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:455", "Error getting Z last Data: " + selectedTableName.value, error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:460", "Error getting Z last Data: " + selectedTableName.value, error2);
         });
         if (isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -10252,7 +10333,7 @@ ${o3}
           timeChartMax.value = 2e-4;
           timeChartFormat.value = "yAxisFix5";
         } else {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:497", "radioChange failed!");
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:502", "radioChange failed!");
         }
         timeChartOpts.value.yAxis.data[0].min = timeChartMin.value;
         timeChartOpts.value.yAxis.data[0].max = timeChartMax.value;
@@ -10295,7 +10376,7 @@ ${o3}
         } else if (degree === "time_series_years") {
           return 17671968e5;
         }
-        formatAppLog("error", "at pages/index/SensorDetail10.vue:546", "transformTimeStamp failed!");
+        formatAppLog("error", "at pages/index/SensorDetail10.vue:551", "transformTimeStamp failed!");
         return Date.now();
       };
       const transLastStamp = (ms2, degree) => {
@@ -10390,7 +10471,7 @@ ${o3}
           timeDataPV.value[0] = parseFloat(calculateTimePV(xresponse.data).toFixed(6));
           checkTimeData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:662", "Error getting X time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:667", "Error getting X time Data: ", error2);
         });
         GetTimeYData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let yresponse = res.data;
@@ -10399,7 +10480,7 @@ ${o3}
           timeDataPV.value[1] = parseFloat(calculateTimePV(yresponse.data).toFixed(6));
           checkTimeData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:693", "Error getting Y time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:698", "Error getting Y time Data: ", error2);
         });
         GetTimeZData(timeStamp, selectedDeviceId.value, selectedTableName.value).then((res) => {
           let zresponse = res.data;
@@ -10408,7 +10489,7 @@ ${o3}
           timeDataPV.value[2] = parseFloat(calculateTimePV(zresponse.data).toFixed(6));
           checkTimeData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:723", "Error getting Z time Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:728", "Error getting Z time Data: ", error2);
         });
         if (!isLastDegree.value) {
           if (curAxisIndex.value === 0) {
@@ -10485,7 +10566,7 @@ ${o3}
           amplitudeDataPV.value[0] = parseFloat(calculateAmplitudePV(xresponse.data).toFixed(3));
           checkAmpData(xresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:842", "Error getting X amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:847", "Error getting X amplitude Data: ", error2);
         });
         GetAmplitudeYData(timeStamp, selectedDeviceId.value).then((res) => {
           let yresponse = res.data;
@@ -10494,7 +10575,7 @@ ${o3}
           amplitudeDataPV.value[1] = parseFloat(calculateAmplitudePV(yresponse.data).toFixed(3));
           checkAmpData(yresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:872", "Error getting Y amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:877", "Error getting Y amplitude Data: ", error2);
         });
         GetAmplitudeZData(timeStamp, selectedDeviceId.value).then((res) => {
           let zresponse = res.data;
@@ -10503,7 +10584,7 @@ ${o3}
           amplitudeDataPV.value[2] = parseFloat(calculateAmplitudePV(zresponse.data).toFixed(3));
           checkAmpData(zresponse);
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:902", "Error getting Z amplitude Data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:907", "Error getting Z amplitude Data: ", error2);
         });
         if (curAxisIndex.value === 0) {
           amplitudeChartData.value = amplitudeXData.value;
@@ -10582,6 +10663,8 @@ ${o3}
             timeChartInfo.value += `-峰值:${lastTimeDataPV.value[curAxisIndex.value]}`, ampChartInfo.value += `-峰值:${amplitudeDataPV.value[curAxisIndex.value]}`;
         }
       };
+      let lastTimeAnomalyStamp = vue.ref(0);
+      let lastAmpAnomalyStamp = vue.ref(0);
       const calculateTimeRatio = (anomalyData) => {
         let r2 = anomalyData / timeDataThreshold.value - 1;
         if (r2 >= 0 && r2 <= 1)
@@ -10594,7 +10677,9 @@ ${o3}
           return 4;
       };
       const checkTimeData = (originalData) => {
-        originalData.data.forEach((t_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const t_data = originalData.data[index];
+          const stamp = Date.now();
           if (t_data > timeDataThreshold.value) {
             let urg = calculateTimeRatio(t_data);
             let exceptionTimeData = {
@@ -10605,16 +10690,28 @@ ${o3}
               urgency: urg,
               threshold: timeDataThreshold.value
             };
-            saveExceptionTimeData(exceptionTimeData);
+            if (urg >= 2 && stamp - lastTimeAnomalyStamp.value > anomalyGap) {
+              lastTimeAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "时程数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionTimeData(exceptionTimeData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionTimeData = async (exceptionData) => {
         PostTimeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1072", "PostTimeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1073", "Successfully uploaded time exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1093", "PostTimeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1094", "Successfully uploaded time exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:1076", "Error post time excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:1097", "Error post time excetional data: ", error2);
         });
       };
       const calculateAmpRatio = (anomalyData) => {
@@ -10629,7 +10726,9 @@ ${o3}
           return 4;
       };
       const checkAmpData = (originalData) => {
-        originalData.data.forEach((a_data, index) => {
+        for (let index = 0; index < originalData.data.length; index++) {
+          const a_data = originalData.data[index];
+          const stamp = Date.now();
           if (a_data > ampDataThreshold.value) {
             let urg = calculateAmpRatio(a_data);
             let exceptionAmpData = {
@@ -10642,16 +10741,28 @@ ${o3}
               urgency: urg,
               threshold: ampDataThreshold.value
             };
-            saveExceptionAmpData(exceptionAmpData);
+            if (urg >= 2 && stamp - lastAmpAnomalyStamp.value > anomalyGap) {
+              lastAmpAnomalyStamp.value = stamp;
+              uni.showModal({
+                title: "异常预警",
+                content: "频谱数据异常，预警信息已发送。",
+                showCancel: false,
+                confirmText: "好的",
+                success: () => {
+                }
+              });
+              saveExceptionAmpData(exceptionAmpData);
+              return;
+            }
           }
-        });
+        }
       };
       const saveExceptionAmpData = async (exceptionData) => {
         PostAmplitudeDataAnomaly(exceptionData).then((res) => {
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1130", "PostAmplitudeAnomaly response: ", res);
-          formatAppLog("log", "at pages/index/SensorDetail10.vue:1131", "Successfully uploaded amplitude exceptional data.");
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1164", "PostAmplitudeAnomaly response: ", res);
+          formatAppLog("log", "at pages/index/SensorDetail10.vue:1165", "Successfully uploaded amplitude exceptional data.");
         }).catch((error2) => {
-          formatAppLog("error", "at pages/index/SensorDetail10.vue:1134", "Error post amplitude excetional data: ", error2);
+          formatAppLog("error", "at pages/index/SensorDetail10.vue:1168", "Error post amplitude excetional data: ", error2);
         });
       };
       let timeDataIntervalId;
@@ -10833,7 +10944,15 @@ ${o3}
         return ampChartInfo;
       }, set ampChartInfo(v2) {
         ampChartInfo = v2;
-      }, axisRadioChange, changeAxis, getChartInfo, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
+      }, axisRadioChange, changeAxis, getChartInfo, get lastTimeAnomalyStamp() {
+        return lastTimeAnomalyStamp;
+      }, set lastTimeAnomalyStamp(v2) {
+        lastTimeAnomalyStamp = v2;
+      }, get lastAmpAnomalyStamp() {
+        return lastAmpAnomalyStamp;
+      }, set lastAmpAnomalyStamp(v2) {
+        lastAmpAnomalyStamp = v2;
+      }, anomalyGap, calculateTimeRatio, checkTimeData, saveExceptionTimeData, calculateAmpRatio, checkAmpData, saveExceptionAmpData, get timeDataIntervalId() {
         return timeDataIntervalId;
       }, set timeDataIntervalId(v2) {
         timeDataIntervalId = v2;
@@ -10897,6 +11016,7 @@ ${o3}
         key: 0,
         class: "settings-sidebar"
       }, [
+        vue.createCommentVNode('\r\n			<view class="settings-header">\n		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>\n			</view> \r\n		'),
         vue.createElementVNode("view", { class: "settings-content" }, [
           vue.createElementVNode("view", { class: "settings-item" }, [
             vue.createVNode(_component_u_switch, {
@@ -11624,7 +11744,7 @@ ${o3}
         years: Array.from({ length: 50 }, (_2, i2) => (/* @__PURE__ */ new Date()).getFullYear() - i2),
         months: Array.from({ length: 12 }, (_2, i2) => i2 + 1),
         days: Array.from({ length: 31 }, (_2, i2) => i2 + 1),
-        directionList: [{ label: "全部", value: null }, { label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
+        directionList: [{ label: "全部", value: null }, { label: "X", value: "X" }, { label: "Y", value: "Y" }, { label: "Z", value: "Z" }],
         deviceSelectList: [
           { label: "全部", value: null },
           { label: "4787BE3A", value: "4787BE3A" },
@@ -11677,7 +11797,7 @@ ${o3}
             this.frequencySpectrumData = spectrumResult.data;
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/abnormal/Building1.vue:233", "获取数据失败：", error2);
+          formatAppLog("error", "at pages/abnormal/Building1.vue:235", "获取数据失败：", error2);
         }
       },
       applyFilter(data) {
@@ -11785,182 +11905,7 @@ ${o3}
         )
       ]),
       vue.createCommentVNode(" 时间筛选器 "),
-      vue.createElementVNode("div", { class: "time-filter" }, [
-        vue.createElementVNode("label", null, [
-          vue.createTextVNode(" 开始时间： "),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.filters.startYear = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "年"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.years, (year) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: year,
-                    value: year
-                  }, vue.toDisplayString(year), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.startYear]
-          ]),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.filters.startMonth = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "月"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.months, (month) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: month,
-                    value: month
-                  }, vue.toDisplayString(month), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.startMonth]
-          ]),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $data.filters.startDay = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "日"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.days, (day) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: day,
-                    value: day
-                  }, vue.toDisplayString(day), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.startDay]
-          ])
-        ]),
-        vue.createElementVNode("label", null, [
-          vue.createTextVNode(" 结束时间： "),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.filters.endYear = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "年"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.years, (year) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: year,
-                    value: year
-                  }, vue.toDisplayString(year), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.endYear]
-          ]),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $data.filters.endMonth = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "月"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.months, (month) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: month,
-                    value: month
-                  }, vue.toDisplayString(month), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.endMonth]
-          ]),
-          vue.withDirectives(vue.createElementVNode(
-            "select",
-            {
-              "onUpdate:modelValue": _cache[7] || (_cache[7] = ($event) => $data.filters.endDay = $event)
-            },
-            [
-              vue.createElementVNode("option", {
-                value: "",
-                disabled: ""
-              }, "日"),
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.days, (day) => {
-                  return vue.openBlock(), vue.createElementBlock("option", {
-                    key: day,
-                    value: day
-                  }, vue.toDisplayString(day), 9, ["value"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ],
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelSelect, $data.filters.endDay]
-          ])
-        ])
-      ]),
+      vue.createCommentVNode('\r\n		<div class="time-filter">\r\n		  <label>\r\n		    开始时间：\r\n		    <select v-model="filters.startYear">\r\n		      <option value="" disabled>年</option>\r\n		      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>\r\n		    </select>\r\n		    <select v-model="filters.startMonth">\r\n		      <option value="" disabled>月</option>\r\n		      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>\r\n		    </select>\r\n		    <select v-model="filters.startDay">\r\n		      <option value="" disabled>日</option>\r\n		      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>\r\n		    </select>\r\n		  </label>\r\n		  <label>\r\n		    结束时间：\r\n		    <select v-model="filters.endYear">\r\n		      <option value="" disabled>年</option>\r\n		      <option v-for="year in years" :key="year" :value="year">{{ year }}</option>\r\n		    </select>\r\n		    <select v-model="filters.endMonth">\r\n		      <option value="" disabled>月</option>\r\n		      <option v-for="month in months" :key="month" :value="month">{{ month }}</option>\r\n		    </select>\r\n		    <select v-model="filters.endDay">\r\n		      <option value="" disabled>日</option>\r\n		      <option v-for="day in days" :key="day" :value="day">{{ day }}</option>\r\n		    </select>\r\n		  </label>\r\n		</div>\r\n		'),
       vue.createCommentVNode(" 异常数据表 "),
       $data.activeType === "timeCurve" ? (vue.openBlock(), vue.createElementBlock("div", {
         key: 0,
@@ -11974,7 +11919,7 @@ ${o3}
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("direction")),
+                    onClick: _cache[2] || (_cache[2] = ($event) => $options.toggleFilter("direction")),
                     class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
                   " 方向▼ ",
@@ -11984,7 +11929,7 @@ ${o3}
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("device")),
+                    onClick: _cache[3] || (_cache[3] = ($event) => $options.toggleFilter("device")),
                     class: vue.normalizeClass({ "active": $data.filters.device })
                   },
                   " 设备▼ ",
@@ -11994,7 +11939,7 @@ ${o3}
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[10] || (_cache[10] = ($event) => $options.toggleFilter("urgency")),
+                    onClick: _cache[4] || (_cache[4] = ($event) => $options.toggleFilter("urgency")),
                     class: vue.normalizeClass({ "active": $data.filters.urgency })
                   },
                   " 紧急程度▼ ",
@@ -12064,12 +12009,12 @@ ${o3}
             vue.createElementVNode("thead", null, [
               vue.createElementVNode("tr", null, [
                 vue.createElementVNode("th", {
-                  onClick: _cache[11] || (_cache[11] = ($event) => $options.toggleFilter("time"))
+                  onClick: _cache[5] || (_cache[5] = ($event) => $options.toggleFilter("time"))
                 }, "时间"),
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[12] || (_cache[12] = ($event) => $options.toggleFilter("direction")),
+                    onClick: _cache[6] || (_cache[6] = ($event) => $options.toggleFilter("direction")),
                     class: vue.normalizeClass({ "active": $data.filters.direction })
                   },
                   " 方向▼ ",
@@ -12079,7 +12024,7 @@ ${o3}
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[13] || (_cache[13] = ($event) => $options.toggleFilter("device")),
+                    onClick: _cache[7] || (_cache[7] = ($event) => $options.toggleFilter("device")),
                     class: vue.normalizeClass({ "active": $data.filters.device })
                   },
                   " 设备▼ ",
@@ -12087,15 +12032,15 @@ ${o3}
                   /* CLASS */
                 ),
                 vue.createElementVNode("th", {
-                  onClick: _cache[14] || (_cache[14] = ($event) => $options.toggleFilter("frequency"))
+                  onClick: _cache[8] || (_cache[8] = ($event) => $options.toggleFilter("frequency"))
                 }, "频率区间"),
                 vue.createElementVNode("th", {
-                  onClick: _cache[15] || (_cache[15] = ($event) => $options.toggleFilter("data"))
+                  onClick: _cache[9] || (_cache[9] = ($event) => $options.toggleFilter("data"))
                 }, "数据"),
                 vue.createElementVNode(
                   "th",
                   {
-                    onClick: _cache[16] || (_cache[16] = ($event) => $options.toggleFilter("urgency")),
+                    onClick: _cache[10] || (_cache[10] = ($event) => $options.toggleFilter("urgency")),
                     class: vue.normalizeClass({ "active": $data.filters.urgency })
                   },
                   " 紧急程度▼ ",
@@ -12177,7 +12122,7 @@ ${o3}
       }, [
         vue.createVNode(_component_u_select, {
           modelValue: $data.showDirectionFilter,
-          "onUpdate:modelValue": _cache[17] || (_cache[17] = ($event) => $data.showDirectionFilter = $event),
+          "onUpdate:modelValue": _cache[11] || (_cache[11] = ($event) => $data.showDirectionFilter = $event),
           list: $data.directionList,
           onConfirm: $options.confirmFilterDirection
         }, null, 8, ["modelValue", "list", "onConfirm"])
@@ -12189,7 +12134,7 @@ ${o3}
       }, [
         vue.createVNode(_component_u_select, {
           modelValue: $data.showDeviceFilter,
-          "onUpdate:modelValue": _cache[18] || (_cache[18] = ($event) => $data.showDeviceFilter = $event),
+          "onUpdate:modelValue": _cache[12] || (_cache[12] = ($event) => $data.showDeviceFilter = $event),
           list: $data.deviceSelectList,
           onConfirm: $options.confirmFilterDevice
         }, null, 8, ["modelValue", "list", "onConfirm"])
@@ -12201,7 +12146,7 @@ ${o3}
       }, [
         vue.createVNode(_component_u_select, {
           modelValue: $data.showUrgencyFilter,
-          "onUpdate:modelValue": _cache[19] || (_cache[19] = ($event) => $data.showUrgencyFilter = $event),
+          "onUpdate:modelValue": _cache[13] || (_cache[13] = ($event) => $data.showUrgencyFilter = $event),
           list: $data.urgencyList,
           onConfirm: $options.confirmFilterUrgency
         }, null, 8, ["modelValue", "list", "onConfirm"])
@@ -12229,7 +12174,7 @@ ${o3}
         years: Array.from({ length: 50 }, (_2, i2) => (/* @__PURE__ */ new Date()).getFullYear() - i2),
         months: Array.from({ length: 12 }, (_2, i2) => i2 + 1),
         days: Array.from({ length: 31 }, (_2, i2) => i2 + 1),
-        directionList: [{ label: "全部", value: null }, { label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
+        directionList: [{ label: "全部", value: null }, { label: "X", value: "X" }, { label: "Y", value: "Y" }, { label: "Z", value: "Z" }],
         deviceSelectList: [
           { label: "全部", value: null },
           { label: "E43AC643", value: "E43AC643" },

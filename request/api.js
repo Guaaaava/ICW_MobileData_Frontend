@@ -84,7 +84,7 @@ export const GetAmplitudeZData = (ftime, device) => {
 export const PostTimeDataAnomaly = (anomaly) => {
 	return request({
 		url: '/TimeAnomaly',
-		method: 'post',
+		method: 'POST',
 		data: anomaly,
 		header: {}
 	})
@@ -94,7 +94,7 @@ export const PostTimeDataAnomaly = (anomaly) => {
 export const PostAmplitudeDataAnomaly = (anomaly) => {
 	return request({
 		url: '/SpectrumAnomaly',
-		method: 'post',
+		method: 'POST',
 		data: anomaly,
 		header: {}
 	})

@@ -10,6 +10,11 @@
 		
 		<!-- 设置侧边栏 -->
 		<view v-if="settingsVisible" class="settings-sidebar">
+		<!--
+			<view class="settings-header">
+		    <u-icon name="arrow-right" size="30" @click="toggleSettings"></u-icon>
+			</view> 
+		-->
 		  <view class="settings-content">
 		    <view class="settings-item">
 		      <u-switch v-model="isValid" @change="handleSwitchChange('isValid', $event)"></u-switch>
@@ -1030,6 +1035,9 @@ const getChartInfo = () => {
 
 /*-- 数据阈值与警报 --
 	--	存储异常数据		--*/
+let lastTimeAnomalyStamp = ref(0);
+let lastAmpAnomalyStamp = ref(0);
+const anomalyGap = 300000; // 每5分钟只能发一次短信，避免短信轰炸 
 
 // 方法：计算时程异常紧急程度
 // 规则：超过阈值0%-100%为1,100%-200%为2,200%-300%为3,300%以上为4
@@ -1044,7 +1052,9 @@ const calculateTimeRatio = (anomalyData: number) => {
 // 方法：检查超出阈值的时程数据，计算倍率，进行存储和警报
 // 调用：在每次获取数据时调用
 const checkTimeData = (originalData: any) => {
-	originalData.data.forEach((t_data: number, index: number) => {
+	for (let index = 0; index < originalData.data.length; index ++) {
+		const t_data = originalData.data[index];
+		const stamp = Date.now();
 		if (t_data > timeDataThreshold.value) {
 			// 计算倍率
 			let urg: number = calculateTimeRatio(t_data);
@@ -1058,9 +1068,20 @@ const checkTimeData = (originalData: any) => {
 				urgency: urg,
 				threshold: timeDataThreshold.value
 			}
-			saveExceptionTimeData(exceptionTimeData);
+			if (urg >= 2 && stamp - lastTimeAnomalyStamp.value > anomalyGap) {
+				lastTimeAnomalyStamp.value = stamp;
+				uni.showModal({
+				  title: '异常预警',
+				  content: '时程数据异常，预警信息已发送。',
+				  showCancel: false,
+				  confirmText: '好的',
+					success: () => {},
+				});
+				saveExceptionTimeData(exceptionTimeData);
+				return;
+			}
 		}
-	});
+	}
 }
 
 // 方法：通过 post 存储异常时程数据
@@ -1101,7 +1122,9 @@ const calculateAmpRatio = (anomalyData: number) => {
 // 方法：检查超出阈值的频谱数据，计算倍率，进行存储和警报
 // 调用：在每次获取数据时调用
 const checkAmpData = (originalData: any) => {
-	originalData.data.forEach((a_data: number, index: number) => {
+	for (let index = 0; index < originalData.data.length; index ++) {
+		const a_data = originalData.data[index];
+		const stamp = Date.now();
 		if (a_data > ampDataThreshold.value) {
 			// 计算倍率
 			let urg: number = calculateAmpRatio(a_data);
@@ -1116,9 +1139,20 @@ const checkAmpData = (originalData: any) => {
 				urgency: urg,
 				threshold: ampDataThreshold.value
 			}
-			saveExceptionAmpData(exceptionAmpData);
+			if (urg >= 2 && stamp - lastAmpAnomalyStamp.value > anomalyGap) {
+				lastAmpAnomalyStamp.value = stamp;
+				uni.showModal({
+				  title: '异常预警',
+				  content: '频谱数据异常，预警信息已发送。',
+				  showCancel: false,
+				  confirmText: '好的',
+					success: () => {},
+				});
+				saveExceptionAmpData(exceptionAmpData);
+				return;
+			}
 		}
-	});
+	}
 }
 
 // 方法：通过 post 存储异常频谱数据

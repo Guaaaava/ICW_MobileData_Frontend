@@ -15,6 +15,7 @@
     </div>
 		
 		<!-- 时间筛选器 -->
+		<!--
 		<div class="time-filter">
 		  <label>
 		    开始时间：
@@ -47,6 +48,7 @@
 		    </select>
 		  </label>
 		</div>
+		-->
 
     <!-- 异常数据表 -->
     <div v-if="activeType === 'timeCurve'" class="table-wrapper">
@@ -173,7 +175,7 @@ export default {
       years: Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i),
       months: Array.from({ length: 12 }, (_, i) => i + 1),
       days: Array.from({ length: 31 }, (_, i) => i + 1),
-      directionList: [{ label: "全部", value: null },{ label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
+      directionList: [{ label: "全部", value: null },{ label: "X", value: "X" }, { label: "Y", value: "Y" }, { label: "Z", value: "Z" }],
       deviceSelectList: [
         { label: "全部", value: null },
         { label: "4787BE3A", value: "4787BE3A" },

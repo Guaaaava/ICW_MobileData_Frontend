@@ -139,7 +139,7 @@ export default {
       years: Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i),
       months: Array.from({ length: 12 }, (_, i) => i + 1),
       days: Array.from({ length: 31 }, (_, i) => i + 1),
-      directionList: [{ label: "全部", value: null },{ label: "x", value: "x" }, { label: "y", value: "y" }, { label: "z", value: "z" }],
+      directionList: [{ label: "全部", value: null },{ label: "X", value: "X" }, { label: "Y", value: "Y" }, { label: "Z", value: "Z" }],
       deviceSelectList: [
         { label: "全部", value: null },
         { label: "E43AC643", value: "E43AC643" },
