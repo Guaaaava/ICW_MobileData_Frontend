@@ -8325,7 +8325,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.06);
+      let ampDataThreshold = vue.ref(0.02);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -8333,7 +8333,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.03, format: "yAxisFix3" }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线
@@ -9434,7 +9434,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.06);
+      let ampDataThreshold = vue.ref(0.02);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -9442,7 +9442,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.03, format: "yAxisFix3" }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线
@@ -10543,7 +10543,7 @@ ${o3}
       let amplitudeChartData = vue.ref([]);
       let amplitudeDataRMS = vue.ref([0, 0, 0]);
       let amplitudeDataPV = vue.ref([0, 0, 0]);
-      let ampDataThreshold = vue.ref(0.06);
+      let ampDataThreshold = vue.ref(0.02);
       let amplitudeChartOpts = vue.ref({
         dataLabel: false,
         update: true,
@@ -10551,7 +10551,7 @@ ${o3}
         dataPointShape: false,
         padding: [20, 30, 0, 5],
         xAxis: { boundaryGap: "justify", labelCount: 12 },
-        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.1 }] },
+        yAxis: { gridType: "solid", data: [{ min: 0, max: 0.03, format: "yAxisFix3" }] },
         extra: { markLine: { data: [
           { value: ampDataThreshold, lineColor: "#DE4A42", showLabel: true, labelOffsetX: -10 }
           // 阈值标记线

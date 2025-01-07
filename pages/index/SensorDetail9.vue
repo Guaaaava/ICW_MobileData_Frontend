@@ -812,7 +812,7 @@ let amplitudeZData = ref([]);
 let amplitudeChartData = ref([]);
 let amplitudeDataRMS = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的有效值
 let amplitudeDataPV = ref<number[]>([0, 0, 0]); // 频谱曲线 X、Y、Z 三轴的峰值
-let ampDataThreshold = ref<number>(0.06); // 频谱数据异常值（幅值），默认为 0.1
+let ampDataThreshold = ref<number>(0.02); // 频谱数据异常值（幅值），默认为 0.02
 
 // 频谱曲线图表设置
 let amplitudeChartOpts = ref({
@@ -822,7 +822,7 @@ let amplitudeChartOpts = ref({
 	dataPointShape: false,
 	padding: [20, 30, 0, 5],
 	xAxis: { boundaryGap: 'justify', labelCount: 12 },
-	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.1 }] },
+	yAxis: { gridType: 'solid', data: [{ min: 0, max: 0.03, format: 'yAxisFix3' }] },
 	extra: { markLine: { data: [
 		{ value: ampDataThreshold, lineColor: '#DE4A42', showLabel: true, labelOffsetX: -10 }, // 阈值标记线
 	] } }
